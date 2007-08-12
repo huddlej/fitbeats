@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Select Pattern{% endblock %}
+
+{% block navbar %}
+<ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/piece/select/">Select Piece</a></li>
+    <li><a href="/parameters/set/ga/">Set Parameters</a></li>
+    <li><a href="/fitness/select/">Select Fitness Functions</a></li>
+    <li><a href="/fitness/draw/">Draw Fitness Trajectories</a></li>
+    <li><a href="/pattern/select/">Select Pattern</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+
+{% if patterns %}
+    <form action="." method="post">
+    <table cellpadding="5" style="border: 3px solid #CCCCCC; width: 400px">
+        <tr>
+            <td>
+                Pattern: <select name="pattern">
+                {% for pattern in patterns %}
+                    <option value="{{ pattern.id }}">{{ pattern.name }}</option>
+                {% endfor %}
+                </select>
+                <br /><br />
+                <input type="submit" value="Evolve">
+            </td>
+        </tr>
+    </table>
+    </form>
+{% endif %}
+
+{% endblock %}

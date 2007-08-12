@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Parameters{% endblock %}
+
+{% block content %}
+<h1>Parameters</h1>
+
+{% if parameter_list %}
+    <ul>
+    {% for parameter in parameter_list %}
+        <li><a href="/parameters/{{parameter.name}}/">{{ parameter.name }}</a> - {{ parameter.value }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No parameters are available.</p>
+{% endif %}
+
+{% endblock %}

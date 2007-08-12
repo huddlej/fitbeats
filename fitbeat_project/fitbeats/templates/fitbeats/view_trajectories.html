@@ -1,0 +1,22 @@
+{% extends "fitbeats/base.html" %}
+
+{% block content %}
+    <h2>{{pattern}}</h2>
+
+    <ul>
+        <li><a href="{% url fitbeats.views.edit_pattern pattern.id %}">Back to Pattern</a></li>
+        {% for t in trajectory_types %}
+            <li><a href="add/{{t.0}}/">Add {{t.1}} Trajectory</a></li>
+        {% endfor %}
+    </ul>
+
+    <h3>Current Trajectories</h3>
+    <ol>    
+        {% for t in trajectories %}
+            <li>
+                <a href="{% url fitbeats.views.edit_trajectory pattern.id,t.id %}">{{t}}</a>
+                <a href="{% url fitbeats.views.delete_trajectory pattern.id,t.id %}"><img src="/site_media/icons/delete.png" border="0" title="Delete Trajectory" /></a>
+            </li>
+        {% endfor %}
+    </ol>
+{% endblock %}

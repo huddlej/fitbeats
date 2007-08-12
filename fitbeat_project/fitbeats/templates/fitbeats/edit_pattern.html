@@ -1,0 +1,16 @@
+{% extends "fitbeats/base.html" %}
+
+{% block content %}
+    {% if pattern %}
+        <ul>
+            <li><a href="{% url view_patterns %}">Back to Patterns</a></li>
+            <li><a href="trajectories/">Edit Trajectories</a></li>
+            <li><a href="parameters/">Edit Parameters</a></li>
+        </ul>
+    {% endif %}
+
+    <form method="POST">
+        {{form.as_p}}
+        <input type="submit" value="Save" />
+    </form>
+{% endblock %}

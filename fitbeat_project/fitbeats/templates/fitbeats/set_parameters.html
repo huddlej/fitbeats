@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Set Parameters{% endblock %}
+
+{% block navbar %}
+<ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/piece/select/">Select Piece</a></li>
+    <li><a href="/parameters/set/ga/">Set Parameters</a></li>
+    <li><a href="/fitness/select/">Select Fitness Functions</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+
+{% if not setGA %}
+<a href="/parameters/set/ga/">GA</a>
+{% else %}
+<strong>GA</strong>
+{% endif %}
+
+{% if not setControl %}
+<a href="/parameters/set/control/">Control</a>
+{% else %}
+<strong>Control</strong>
+{% endif %}
+
+<br /><br />
+
+{% if parameters %}
+    <table cellpadding="5">
+    {% for parameter in parameters %}
+        <tr>
+            <td><a href="/parameters/{{ parameter.name }}/">{{ parameter.name }}</a></td>
+            <td><form action="/parameters/set/{{ parameter.id }}/" method="post"><input type="text" name="value" value="{{ parameter.value }}" size="3" /></td>
+            <td><input type="submit" value="Update" /></form></td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endif %}
+{% endblock %}

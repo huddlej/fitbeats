@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Evolve Pattern{% endblock %}
+
+{% block navbar %}
+<ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/piece/select/">Select Piece</a></li>
+    <li><a href="/parameters/set/ga/">Set Parameters</a></li>
+    <li><a href="/fitness/select/">Select Fitness Functions</a></li>
+    <li><a href="/fitness/draw/">Draw Fitness Trajectories</a></li>
+    <li><a href="/pattern/select/">Select Pattern</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+
+{% if pattern %}
+    <table cellpadding="5" style="border: 3px solid #CCCCCC; width: 400px">
+        <tr>
+            <td>
+                Evolving Pattern: {{ pattern.name }}<blink>...</blink>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center">
+                <form action="/pattern/evaluate/{{ pattern.id }}/" method="post">
+                <input type="submit" value="Evaluate" />
+                <input type="reset" value="Cancel" />
+                </form>
+            </td>
+          </tr>
+    </table>
+    </form>
+{% endif %}
+
+{% endblock %}

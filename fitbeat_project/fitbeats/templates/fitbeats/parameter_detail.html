@@ -1,0 +1,13 @@
+{% if parameter %}
+    <h1>{{parameter.name}}</h1>
+
+    <p>
+    Value: {{parameter.value}}<br />
+    GA Parameter: {{parameter.isGAParameter}}<br />
+    Control Parameter: {{parameter.isControlParameter}}
+    </p>
+{% else %}
+    <h1>No parameter found by that name.</h1>
+{% endif %}
+
+<a href="/parameters/set/{% if parameter.isGAParameter %}ga{% else %}control{% endif %}/">Back to Set Parameters</a>

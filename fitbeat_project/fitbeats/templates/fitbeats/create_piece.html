@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+<ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/piece/select/">Select Piece</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+
+<form action="." method="post">
+<div>            
+    Name: <input type="text" name="name" /><br />
+    Number of Patterns: <input type="text" name="numOfPatterns" size="3" /><br />
+    <br />
+    <input type="submit" value="Create Pattern" />
+</div>
+</form>
+
+{% endblock %}

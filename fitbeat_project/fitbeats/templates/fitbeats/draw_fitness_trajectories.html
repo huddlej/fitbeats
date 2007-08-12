@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Draw Fitness Trajectories{% endblock %}
+
+{% block navbar %}
+<ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/piece/select/">Select Piece</a></li>
+    <li><a href="/parameters/set/ga/">Set Parameters</a></li>
+    <li><a href="/fitness/select/">Select Fitness Functions</a></li>
+    <li><a href="/fitness/draw/">Draw Fitness Trajectories</a></li>
+    <li><a href="/pattern/select/">Select Pattern</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+
+<div align="center">
+    <form action="." method="post">
+    <select name="selectFitnessFunction" onchange="this.form.submit()">
+    {% for f in fitnessFunctions %}
+        <option value="{{ f.id }}" {% ifequal fitnessFunction.id f.id %}SELECTED{% endifequal %}>{{ f.name }}</option>
+    {% endfor %}
+    </select>
+    <input type="button" value="?" />
+    </form>
+</div>
+
+<div align="center">
+<form action="." method="post">
+
+{% if fitnessFunction %}
+    <input type="hidden" name="fitnessFunctionId" value="{{ fitnessFunction.id }}" />
+{% endif %}
+
+<div align="center" style="margin-top: 10px">
+    <table border=1 cellspacing="10" cellpadding="5" style="border: 3px solid #CCCCCC">
+        <tr>
+            {% for pattern in patterns %}
+                <td>
+                    <iframe src="/xml/{{ pattern.id }}/" style="width: 200px; height: 100px; margin-top: 0px">
+                    </iframe><br/>
+                    {{ pattern.pattern }}<br />
+                    Initial: <input type="text" name="{{ pattern.id }}_initialValue" size="3" value="{{ pattern.initialValue }}" /><br />
+                    Final: <input type="text" name="{{ pattern.id }}_finalValue" size="3" value="{{ pattern.finalValue }}" /><br />
+                    
+                    Ctl Pt 1 (x, y): <input type="text" name="{{ pattern.id }}_ctlPt1x" size="3" value="{{ pattern.ctlPt1x }}" /> 
+                    <input type="text" name="{{ pattern.id }}_ctlPt1y" size="3" value="{{ pattern.ctlPt1y }}" /><br />
+                    
+                    Ctl Pt 2 (x, y): <input type="text" name="{{ pattern.id }}_ctlPt2x" size="3" value="{{ pattern.ctlPt2x }}" /> 
+                    <input type="text" name="{{ pattern.id }}_ctlPt2y" size="3" value="{{ pattern.ctlPt2y }}" /><br />
+                </td>
+            {% endfor %}
+        </tr>
+    </table>
+</div>
+
+<div align="center" style="margin-top: 10px">
+    <input type="submit" value="Save" />
+    <input type="reset" value="Cancel" />
+</div>
+
+</form>
+</div>
+
+{% endblock %}

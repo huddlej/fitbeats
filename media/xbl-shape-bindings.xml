@@ -1,0 +1,210 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="xbl-shape-bindings.css" type="text/css"?><bindings xmlns="http://www.mozilla.org/xbl" xmlns:xbl="http://www.mozilla.org/xbl" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg">
+
+  <binding id="canvas">
+	<content>
+	  <svg:svg style="display: inline;">
+		<children/>
+	  </svg:svg>
+	</content>
+	<implementation>
+	  <property name="inner" readonly="true">
+		<getter>
+		  <![CDATA[
+		  return document.getAnonymousNodes(this)[0];
+		  ]]>
+		</getter>
+	  </property>
+	</implementation>
+  </binding>
+
+  <binding id="shape" extends="svg:generic">
+	<implementation>
+	  <method name="update">
+		<body>
+		  <![CDATA[
+		  var id = this.parentNode.inner.suspendRedraw(1000);
+		  var nodes = this.childNodes;
+		  for(var n = 0; n<nodes.length; ++n) {
+			try {
+			  nodes.item(n).update();
+            } 
+            catch(ex) {}
+		  }
+		  this.parentNode.inner.unsuspendRedraw(id);
+		  ]]>
+		</body>
+	  </method>
+	</implementation>
+  </binding>
+
+  <binding id="cline" extends="svg:generic">
+	<content>
+		<svg:polyline xbl:inherits="style"/>
+	</content>
+	<implementation>	 
+	  <constructor>
+		<![CDATA[
+		this.inner  = document.getAnonymousNodes(this)[0];
+		this.parent = this.parentNode;
+
+		// store the names of the variables that we're listening in on:
+		this.vX1 = this.getAttribute("x1var");
+		this.vY1 = this.getAttribute("y1var");
+		this.vX2 = this.getAttribute("x2var");
+		this.vY2 = this.getAttribute("y2var");
+
+		// create our 2 endpoint objects:
+		this.point1 = this.inner.ownerSVGElement.createSVGPoint();
+		this.point2 = this.inner.ownerSVGElement.createSVGPoint();
+
+		// initialize our inner svg object:
+		this.inner.points.clear();
+		this.inner.points.appendItem(this.point1);
+		this.inner.points.appendItem(this.point2);
+
+		this.update();
+		]]>
+	  </constructor>
+	  <method name="update">
+		<body>
+		  <![CDATA[
+		  var id = this.inner.ownerSVGElement.suspendRedraw(1000);
+		  this.point1.x = this.parent.getAttribute(this.vX1);
+		  this.point1.y = this.parent.getAttribute(this.vY1);
+		  this.point2.x = this.parent.getAttribute(this.vX2);
+		  this.point2.y = this.parent.getAttribute(this.vY2);
+		  this.inner.ownerSVGElement.unsuspendRedraw(id);
+		  ]]>
+		</body>
+	  </method>
+	</implementation>
+  </binding>
+
+  <binding id="curve" extends="svg:generic">
+	<content>
+		<svg:path xbl:inherits="style"/>
+	</content>
+	<implementation>	  
+	  <constructor>
+		<![CDATA[ 
+		this.inner  = document.getAnonymousNodes(this)[0];
+		this.parent = this.parentNode;
+		
+        // store the names of the variables that we're listening in on:
+		this.vX1  = this.getAttribute("x1var");
+		this.vY1  = this.getAttribute("y1var");
+		this.vX2  = this.getAttribute("x2var");
+		this.vY2  = this.getAttribute("y2var");
+		this.vCX1 = this.getAttribute("cx1var");
+		this.vCY1 = this.getAttribute("cy1var");
+		this.vCX2 = this.getAttribute("cx2var");
+		this.vCY2 = this.getAttribute("cy2var");
+
+		// create move and curve segment objects and
+		// initialize the inner svg object:
+		
+		// createSVGPathSegCurvetoCubicAbs() is not implemented yet, so we
+        // use the following code to much the same effect:
+		this.inner.setAttribute("d", "M 0 0 C 0 0 0 0 0 0");
+		this.moveSegment  = this.inner.pathSegList.getItem(0);
+		this.curveSegment = this.inner.pathSegList.getItem(1);
+		
+		// finally...
+		this.update(); 
+		]]>
+	  </constructor>
+	  <method name="update">
+		<body>
+		<![CDATA[ 
+		  var id = this.inner.ownerSVGElement.suspendRedraw(1000);
+		  this.moveSegment.x   = this.parent.getAttribute(this.vX1);
+		  this.moveSegment.y   = this.parent.getAttribute(this.vY1);
+		  this.curveSegment.x1 = this.parent.getAttribute(this.vCX1);
+		  this.curveSegment.y1 = this.parent.getAttribute(this.vCY1);
+		  this.curveSegment.x2 = this.parent.getAttribute(this.vCX2);
+		  this.curveSegment.y2 = this.parent.getAttribute(this.vCY2);
+		  this.curveSegment.x  = this.parent.getAttribute(this.vX2);
+		  this.curveSegment.y  = this.parent.getAttribute(this.vY2); 
+		  this.inner.ownerSVGElement.unsuspendRedraw(id);
+		  ]]>
+		</body>
+	  </method>
+	</implementation>
+  </binding>
+
+
+  <binding id="controlpoint" extends="svg:generic">
+	<content>
+		<svg:circle r="0.1cm" style="fill: red;"/>
+	</content>
+	<implementation>	  
+	  <constructor>
+		  this.vX = this.getAttribute("xvar");
+		  this.vY = this.getAttribute("yvar");
+		  this.inner  = document.getAnonymousNodes(this)[0];
+		  this.parent = this.parentNode;
+		  this.update();
+	  </constructor>
+	  <method name="update">
+		<body>
+		  <![CDATA[
+		  var id = this.inner.ownerSVGElement.suspendRedraw(1000);
+		  this.inner.cx.baseVal.value = this.parentNode.getAttribute(this.vX);
+		  this.inner.cy.baseVal.value = this.parentNode.getAttribute(this.vY);
+		  this.inner.ownerSVGElement.unsuspendRedraw(id);
+		  ]]>
+		</body>
+	  </method>
+	  <method name="moveto">
+		<parameter name="x"/>
+		<parameter name="y"/>
+		<body>
+		  <![CDATA[
+		  //this.inner.cx.baseVal.value = x;
+		  //this.inner.cy.baseVal.value = y;
+		  var ctrX = this.getAttribute("xvar");
+		  var ctrY = this.getAttribute("yvar");
+		  if (!ctrX) return;
+		  this.parentNode.setAttribute(ctrX,x);
+		  this.parentNode.setAttribute(ctrY,y);
+          this.parentNode.update();
+		  ]]>
+		</body>
+	  </method>
+
+	  <property name="_dX"> 0 </property>
+	  <property name="_dY"> 0 </property>	  
+	  <method name="_mm">
+		<parameter name="evt"/>
+		<body>
+		  <![CDATA[
+		  document._dragContext.moveto( 
+		    evt.clientX - document._dragContext._dX,
+		    evt.clientY - document._dragContext._dY);
+		  ]]>
+		</body>
+	  </method>
+	  <method name="_mu">
+		<parameter name="evt"/>
+		<body>
+		  <![CDATA[
+		  document.removeEventListener("mousemove", document._dragContext._mm,true);
+		  document.removeEventListener("mouseup", document._dragContext._mu,true);
+		  ]]>
+		</body>
+	  </method>
+	</implementation>
+	<handlers>
+	  <handler event="mousedown">
+		<![CDATA[
+		document._dragContext = this;
+		this._dX = event.clientX - this.inner.cx.baseVal.value;
+		this._dY = event.clientY - this.inner.cy.baseVal.value;
+		document.addEventListener("mousemove", this._mm, true);
+		document.addEventListener("mouseup", this._mu, true);
+		]]>
+	  </handler>
+	</handlers>
+  </binding>
+</bindings>

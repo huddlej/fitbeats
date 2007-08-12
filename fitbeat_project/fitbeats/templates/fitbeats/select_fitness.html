@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Select Fitness Functions{% endblock %}
+
+{% block navbar %}
+<ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/piece/select/">Select Piece</a></li>
+    <li><a href="/parameters/set/ga/">Set Parameters</a></li>
+    <li><a href="/fitness/select/">Select Fitness Functions</a></li>
+    <li><a href="/fitness/draw/">Draw Fitness Trajectories</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+
+<form method="post" action=".">
+
+<table cellpadding="5">
+    <tr>
+        <td style="text-align: center; width: 190px">
+            <label for="id_unselectedFunctions">Unselected Functions:</label>
+            <select name="unselectedFunctions" multiple=multiple size="10">
+            {% for func in unselectedFunctions %}
+                <option value="{{ func.id }}">{{ func.name }}</option>
+            {% endfor %}
+            </select>
+        </td>
+        <td style="width: 40px">
+            <input type="submit" name="submitBtn" value="Deselect" /><br />
+            <input type="submit" name="submitBtn" value="Select" />
+        </td>
+        <td style="text-align: center; width: 190px">
+            <label for="id_selectedFunctions">Selected Functions:</label> {{ form.selectedFunctions }}
+            <select name="selectedFunctions" multiple=multiple size="10">
+            {% for func in selectedFunctions %}
+                <option value="{{ func.id }}">{{ func.name }}</option>
+            {% endfor %}
+            </select>
+        </td>
+    </tr>
+</table>
+
+</form>
+{% endblock %}

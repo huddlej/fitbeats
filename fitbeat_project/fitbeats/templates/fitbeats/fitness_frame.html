@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}{% endblock %}
+{% block navbar %}{% endblock %}
+
+{% block content %}
+
+<div align="center">
+    <form action="." method="post">
+    <select name="selectFitnessFunction" onchange="this.form.submit()">
+    {% for f in fitnessFunctions %}
+        <option value="{{ f.id }}" {% ifequal fitnessFunction.id f.id %}SELECTED{% endifequal %}>{{ f.name }}</option>
+    {% endfor %}
+    </select>
+    <input type="button" value="?" />
+    </form>
+</div>
+
+<form action="." method="post">
+
+{% if fitnessFunction %}
+    <input type="hidden" name="fitnessFunctionId" value="{{ fitnessFunction.id }}" />
+{% endif %}
+
+<div align="center" style="margin-top: 10px">
+    <table border=1 cellspacing="10" cellpadding="5" style="border: 3px solid #CCCCCC">
+        <tr>
+            {% for pattern in patterns %}
+                <td>
+                    <iframe src="/xml/8/" style="width: 200px; height: 100px; margin-top: 0px">
+                    </iframe><br/>
+                    Pattern: {{ pattern.pattern.name }}<br />
+                    <input type="text" name="{{ pattern.pattern.sequenceValue }}_initialValue" size="3" value="{{ pattern.initialValue }}" /><br />
+                    <input type="text" name="{{ pattern.pattern.sequenceValue }}_finalValue" size="3" value="{{ pattern.finalValue }}" /><br />
+                    <select name="{{ pattern.pattern.sequenceValue }}_joiningFunction">
+                    {% for joiningFunction in joiningFunctions %}
+                        <option value="{{ joiningFunction.id }}" {% ifequal joiningFunction.id pattern.joiningFunction %}SELECTED{% endifequal %}>{{ joiningFunction.name }}</option>
+                    {% endfor %}
+                    </select>
+                </td>
+            {% endfor %}
+        </tr>
+    </table>
+</div>
+
+<div align="center" style="margin-top: 10px">
+    <input type="submit" value="Save" />
+    <input type="reset" value="Cancel" />
+</div>
+
+</form>
+
+{% endblock %}

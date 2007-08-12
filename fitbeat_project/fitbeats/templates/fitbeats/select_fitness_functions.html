@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Select Fitness Functions{% endblock %}
+
+{% block content %}
+<h1>Select Fitness Functions</h1>
+
+<table cellpadding="5">
+    <tr>
+        <td style="text-align: center; width: 190px">
+            Unselected Functions:<br />
+            <select name="unselectedFunctions" size="10">
+            {% if unselectedFunctions %}
+                {% for function in unselectedFunctions %}
+                    <option value="{{ function.name }}">{{ function.name }}</option>
+                {% endfor %}
+            {% endif %}
+            </select>
+        </td>
+        <td style="width: 40px">
+            <input type="button" value="&lt;-" /><br />
+            <input type="button" value="-&gt;" />
+        </td>
+        <td style="text-align: center; width: 190px">
+            Selected Functions:<br />
+            <select name="selectedFunctions" size="10">
+            {% if selectedFunctions %}
+                {% for function in selectedFunctions %}
+                    <option value="{{ function.name }}">{{ function.name }}</option>
+                {% endfor %}
+            {% endif %}
+            </select>
+        </td>
+    </tr>
+</table>
+{% endblock %}

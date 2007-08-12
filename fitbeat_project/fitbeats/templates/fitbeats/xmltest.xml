@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="/site_media/xbl-shape-bindings.css" type="text/css"?>
+<doc>
+<canvas>
+
+  <shape x1="{{ x1 }}" y1="300" x2="170" y2="300" cx1="110" cy1="330" cx2="150" cy2="330" >
+	<curve x1var="x1" y1var="y1" 
+           x2var="x2" y2var="y2" 
+	       cx1var="cx1" cy1var="cy1" 
+           cx2var="cx2" cy2var="cy2" 
+           style="fill:none; stroke:green; stroke-width:2;"/>
+	<cline x1var="x1" y1var="y1" 
+           x2var="cx1" y2var="cy1" style="fill:none; stroke:blue; stroke-width:1;stroke-dasharray:4,4,4,4;"/>
+	<cline x1var="x2" y1var="y2" 
+           x2var="cx2" y2var="cy2" style="fill:none; stroke:blue; stroke-width:1;"/>
+	<controlpoint xvar="x1" yvar="y1"/>
+	<controlpoint xvar="x2" yvar="y2"/>
+	<controlpoint xvar="cx1" yvar="cy1"/>
+	<controlpoint xvar="cx2" yvar="cy2"/>
+  </shape>
+
+</canvas>
+</doc>
+

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+<ul>
+    <li><a href="/">Home</a></li>
+    {% if currentUser %}
+        <li><a href="/piece/select/">Select Piece</a></li>
+    {% endif %}
+    {% if currentPiece %}
+        <li><a href="/parameters/set/ga/">Set Parameters</a></li>
+    {% endif %}
+</ul>
+{% endblock %}
+
+{% block content %}
+Welcome!  Start by {% if currentUser %}selecting a piece to work on...{% else %}<a href="/login/">logging in</a>.{% endif %}
+<br /><br />
+{% if currentUser %}When you are done you can <a href="/logout/">logout</a>.{% endif %}
+{% endblock %}

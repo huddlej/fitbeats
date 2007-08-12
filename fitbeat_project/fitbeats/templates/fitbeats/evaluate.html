@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+<ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/piece/select/">Select Piece</a></li>
+    <li><a href="/parameters/set/ga/">Set Parameters</a></li>
+    <li><a href="/fitness/select/">Select Fitness Functions</a></li>
+    <li><a href="/fitness/draw/">Draw Fitness Trajectories</a></li>
+    <li><a href="/pattern/select/">Select Pattern</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+
+{% if patterns %}
+    <table  cellpadding="5" style="border: 3px solid #CCCCCC; width: 400px">
+        <tr>
+            <th>Pattern</th>
+            <th>Data</th>
+            <th>Rank</th>
+            <th>Re-evolve</th>
+        </tr>
+        {% for pattern in patterns %}
+            <tr {% ifequal pattern.id patternId %} bgcolor="#cccccc" {% endifequal %}>
+                <td style="text-align: center">{{ pattern.name }}</td>
+                <td style="text-align: center">
+                    <form action="." method="post">
+                    <input type="hidden" name="pattern" value="{{ pattern.id }}" />
+                    <input type="button" value="Download" />
+                </td>
+                <td style="text-align: center">
+                    <select name="value" onchange="this.form.submit()">
+                    {% for i in valueRange %}
+                        <option value="{{ i }}" {% ifequal pattern.evaluationValue i %} SELECTED {% endifequal %}>
+                            {{ i }}
+                        </option>
+                    {% endfor %}
+                    </select>
+                    </form>
+                </td>
+                <td style="text-align: center">
+                    <a href="/pattern/evolve/{{ pattern.id }}">x</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+
+{% endblock %}

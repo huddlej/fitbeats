@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+<ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/piece/select/">Select Piece</a></li>
+    {% if currentPiece %}
+        <li><a href="/parameters/set/ga/">Set Parameters</a></li>
+    {% endif %}
+</ul>
+{% endblock %}
+
+{% block content %}
+
+{% if pieces %}
+<div>
+    <form action="." method="post">
+        Piece: <select name="piece">
+        {% for piece in pieces %}
+            <option value="{{ piece.id }}" {% if currentPiece %} {% ifequal currentPiece piece.id %} SELECTED {% endifequal %} {% endif %}>{{ piece.name }}</option>
+        {% endfor %}
+        </select>
+        <br /><br />
+        <input type="submit" name="submitBtn" value="Select Piece" />
+    </form>
+</div>
+{% endif %}
+
+<div style="margin-top: 10px;">
+    <form action="/piece/create/" method="post">
+        <input type="submit" name="submitBtn" value="Create New Piece" />
+    </form>
+</div>
+
+{% endblock %}

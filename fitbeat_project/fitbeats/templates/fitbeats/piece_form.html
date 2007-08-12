@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if title %}
+    <h1>{{ title }}</h1>
+{% endif %}
+
+<form action="" method="post">
+<div>            
+    User: {{ form.user }}<br />
+    Name: {{ form.name }}<br />
+    <br /><br />
+    <input type="submit" value="Create Pattern" />
+</div>
+</form>
+
+{% endblock %}

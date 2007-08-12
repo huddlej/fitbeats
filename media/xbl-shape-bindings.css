@@ -1,0 +1,25 @@
+canvas
+{
+	-moz-binding: url("xbl-shape-bindings.xml#canvas");
+}
+
+
+controlpoint
+{
+	-moz-binding: url("xbl-shape-bindings.xml#controlpoint");
+}
+
+shape
+{
+	-moz-binding: url("xbl-shape-bindings.xml#shape");
+}
+
+curve
+{
+	-moz-binding: url("xbl-shape-bindings.xml#curve");
+}
+
+cline
+{
+	-moz-binding: url("xbl-shape-bindings.xml#cline");
+}
