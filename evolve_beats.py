@@ -75,7 +75,6 @@ def main():
     
     try:
         pattern = Pattern.objects.get(pk=pattern_id)
-        #print "Loaded pattern: %s" % pattern
     except Pattern.DoesNotExist:
         print "Error: could not load pattern %s" % pattern_id
         sys.exit(1)
@@ -116,7 +115,12 @@ def main():
         if m >= 0:
             selectedMutators.append(mutators[m])
     """
+    # Prepare gene
+    PatternGene.mutProb = parameters['gene_mutation_probability']
+    
     # Prepare organism
+    PatternOrganism.mutProb = parameters['organism_mutation_probability']
+    PatternOrganism.crossoverRate = parameters['organism_crossover_rate']
     PatternOrganism.instrument_length = instrument_length
     PatternOrganism.length = length
     PatternOrganism.crossover = crossover()
@@ -130,7 +134,6 @@ def main():
     ph = PatternPopulation(init=int(parameters['population_initial_size']),
                            species=PatternOrganism)
     ph.childCount = int(parameters['population_new_children'])
-
     max_generations = int(parameters['population_max_generations'])
     
     if not quiet:

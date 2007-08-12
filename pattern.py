@@ -32,12 +32,11 @@ class PatternGene(IntGene):
         else:
             return cmp(this.value, other.value)
         
-class PatternOrganism(Organism):    
+class PatternOrganism(Organism):
+    mutProb = 0.02
+    crossoverRate = 0.9
+    
     def __init__(self, **kw):
-        self.mutProb = 0.02
-        self.crossoverRate = 0.9
-        self.partExchangeProb = 0
-
         self.genes = Numeric.array([[self.gene() 
                                     for i in xrange(self.length)]
                                     for j in xrange(self.instrument_length)], 'O')
@@ -123,51 +122,7 @@ class PatternOrganism(Organism):
         self_copy = copy.deepcopy(self)
         self_copy.fitness_value = None
         return self_copy
-    
-    def partExchange(self, partner):
-        # TODO: Rewrite for array data structure
-        child1 = self.copy()
-        child2 = partner.copy()
-        
-        # Select a random instrument to exchange
-        instrument = randint(0, self.instrument_length - 1)
-        
-        # Calculate the range of genes represented by the chosen instrument row
-        range_start = instrument * self.length
-        range_end = (instrument + 1) * self.length
-        
-        for i in range(range_start, range_end):
-            # Copy genes from partner sources
-            child1.genes[str(i)], child2.genes[str(i)] = child2.genes[str(i)], child1.genes[str(i)]
-            
-        return (child1, child2)
 
-    def groupPartExchange(self, partner):
-        # TODO: Rewrite for array data structure
-        child1 = self.copy()
-        child2 = partner.copy()
-
-        # Select a random number of instrument to exchange        
-        #totalExchange = randint(1, self.instrument_length)
-        totalExchange = randint(1, self.instrument_length / 2)
-        
-        instrument_length = range(self.instrument_length)
-        exchangeinstrument_length = []
-        for i in range(totalExchange):
-            index = randint(0, len(instrument_length) - 1)
-            exchangeinstrument_length.append(instrument_length.pop(index))
-        
-        for instrument in exchangeinstrument_length:
-            # Calculate the range of genes represented by the chosen instrument row
-            range_start = instrument * self.length
-            range_end = (instrument + 1) * self.length
-            
-            for i in range(range_start, range_end):
-                # Copy genes from partner sources
-                child1.genes[str(i)], child2.genes[str(i)] = child2.genes[str(i)], child1.genes[str(i)]
-            
-        return (child1, child2)
-        
     def mutate(self):
         """
         Implement the mutation phase, invoking
@@ -197,7 +152,6 @@ class PatternOrganism(Organism):
                 else:
                     break
             
-            #print "mutating..."
             mutant = operator.mutate()
         
         return mutant
@@ -242,10 +196,7 @@ class PatternPopulation(Population):
                 self.add(self.__class__())
     
         # Select n individuals to be parents
-        #print "selecting..."
         parents = self.selector.select(self.organisms, self.childCount)
-        #print "organisms: ", len(self.organisms)
-        #print "parents: ", len(parents)
         children = []
         
         for i in xrange(self.childCount):
@@ -262,9 +213,7 @@ class PatternPopulation(Population):
                 i += 1
         
             # Reproduce
-            #print "Before mating"
             child1, child2 = parent1 + parent2
-            #print "After mating"
 
             # Mutate children
             child1 = child1.mutate()
@@ -272,10 +221,8 @@ class PatternPopulation(Population):
         
             children.extend([child1, child2])
 
-        #print "Done mating..."
         children.extend(parents)
         children.sort()
 
         # Set parents and children as the new population
         self.organisms = children
-        #print "Set organisms"
