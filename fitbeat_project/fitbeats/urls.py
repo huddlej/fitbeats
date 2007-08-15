@@ -22,5 +22,6 @@ urlpatterns = patterns('',
     url(r'^patterns/(\d+)/trajectories/(\d+)/$', 'fitbeats.views.edit_trajectory', name='edit_trajectory'),
     url(r'^patterns/(\d+)/trajectories/delete/(\d+)/$', 'fitbeats.views.delete_trajectory', name='delete_trajectory'),
     url(r'^patterns/(\d+)/parameters/$', 'fitbeats.views.edit_parameters', name='edit_parameters'),
+    (r'^patterns/(\d+)/evolve/$', 'fitbeats.views.evolve_pattern'),
     (r'^$', 'fitbeats.views.index'),
 )

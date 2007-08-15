@@ -1,0 +1,17 @@
+{% block content %}
+    {% if best_pattern %}
+        <table border=1>
+        {% for row in best_pattern %}
+            <tr>
+	        {% for column in row %}
+		    {% if forloop.first %}
+		        <td>{{column}}</td>
+		    {% else %}
+		    	<td>{% ifequal column 1 %}x{% else %}&nbsp;{% endifequal %}</td>
+		    {% endif %}
+		{% endfor %}
+            </tr>
+	{% endfor %}
+	</table>
+    {% endif %}
+{% endblock %}

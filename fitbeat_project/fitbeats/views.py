@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from fitbeat_project.fitbeats.models import *
 from fitbeat_project.fitbeats.widgets import TextHiddenInput
+import evolve_beats
 
 COORDINATE_TRAJECTORY_NAMES = ('Initial', 'Control Point 1', 'Control Point 2', 'Final')
 
@@ -321,3 +322,26 @@ def edit_parameters(request, pattern_id):
                               context_instance=RequestContext(request))
 edit_parameters = login_required(edit_parameters)
 edit_parameters = transaction.commit_manually(edit_parameters)
+
+@login_required
+def evolve_pattern(request, pattern_id):
+    pattern = get_object_or_404(Pattern, pk=pattern_id, author__pk=request.user.id)
+    instruments = pattern.instruments.order_by('sequence_number')
+    instruments = [[instrument.name] for instrument in instruments]
+
+    best_pattern = evolve_beats.main(pattern_id)
+    best_pattern = best_pattern.genes.tolist()
+    
+    for i in xrange(len(instruments)):
+        instruments[i].extend(best_pattern[i])
+    best_pattern = instruments
+    
+    title = heading = "Best Pattern"
+    context = {'title': title,
+               'heading': heading,
+               'pattern': pattern,
+               'best_pattern': best_pattern,
+               }
+    return render_to_response('fitbeats/evolve_pattern_results.html',
+                              context,
+                              context_instance=RequestContext(request))

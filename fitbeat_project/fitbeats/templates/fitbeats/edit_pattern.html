@@ -6,6 +6,7 @@
             <li><a href="{% url view_patterns %}">Back to Patterns</a></li>
             <li><a href="trajectories/">Edit Trajectories</a></li>
             <li><a href="parameters/">Edit Parameters</a></li>
+	    <li><a href="{% url fitbeats.views.evolve_pattern pattern.id %}">Evolve Pattern</a></li>
         </ul>
     {% endif %}
 

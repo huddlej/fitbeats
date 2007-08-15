@@ -19,7 +19,12 @@ from fitbeat_project.fitbeats.models import *
 from selector import RouletteSelector, TournamentSelector, NewRouletteSelector
 from crossover import OnePointCrossover
         
-def main():
+def main(pattern_id=None):
+    if pattern_id:
+        return_best = True
+    else:
+        return_best = False
+    
     usage = "usage: %prog [-p] [[options] pattern_id]"
     parser = OptionParser(usage)
     parser.add_option("-m", "--mutators",
@@ -56,12 +61,12 @@ def main():
             except:
                 pass
         sys.exit()
-    elif len(args) != 1:
+    elif pattern_id is None and len(args) != 1:
         parser.error("""You must supply a pattern id as an argument or use the
                         -p flag to list the available patterns.""")
     else:
         try:
-            pattern_id = int(args[0])
+            pattern_id = pattern_id or int(args[0])
         except ValueError:
             parser.error("You must supply an integer value for the pattern id.")
     
@@ -203,6 +208,9 @@ def main():
     else:
         if not quiet:
             print "No file written."
+
+    if return_best:
+        return ph.best()
         
 if __name__ == '__main__':
     main()
