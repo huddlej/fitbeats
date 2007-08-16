@@ -1,3 +1,9 @@
+{% if not is_done %}
+    {% block extrahead %}
+    <meta http-equiv="refresh" content="7">
+    {% endblock %}
+{% endif %}
+
 {% block content %}
     {% if best_pattern %}
         <table border=1>

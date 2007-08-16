@@ -157,6 +157,8 @@ def main(pattern_id=None):
     lastBest = 1000
     lastBestCount = 0
     i = 0
+    statfile = "/home/huddlej/fitbeats/testData.txt"
+    
     while i < max_generations:
         try:
             b = ph.best()
@@ -170,7 +172,14 @@ def main(pattern_id=None):
             
             stats[i] = {'generation': i, 
                         'bestfitness': b.fitness(), 
-                        'popfitness': ph.fitness(),}
+                        'popfitness': ph.fitness(),
+                        'best_pattern': b,
+                        'is_done': False}
+            webstats = stats[i]            
+            # Store for web, TODO: make this better
+            fhandle = open(statfile, "w")
+            pickle.dump(webstats, fhandle)
+            fhandle.close()
             
             if b.fitness() <= 0:
                 break
@@ -189,6 +198,11 @@ def main(pattern_id=None):
         except KeyboardInterrupt:
             break
 
+    webstats['is_done'] = True
+    fhandle = open(statfile, "w")
+    pickle.dump(webstats, fhandle)
+    fhandle.close()
+            
     if not quiet:
         print "Stopped:\n%f" % lastBest
         #print "Average diversity: %f" % ph.diversity()

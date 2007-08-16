@@ -1,5 +1,7 @@
-from xml.dom.minidom import parse
+import os
+import pickle
 import random
+from xml.dom.minidom import parse
 from django import newforms as forms
 from django.db import transaction
 from django.http import HttpResponse, HttpResponseRedirect
@@ -326,21 +328,38 @@ edit_parameters = transaction.commit_manually(edit_parameters)
 @login_required
 def evolve_pattern(request, pattern_id):
     pattern = get_object_or_404(Pattern, pk=pattern_id, author__pk=request.user.id)
+    os.spawnv(os.P_NOWAIT, "python", ("/home/huddlej/fitbeats/evolve_beats.py", pattern_id))
+    return HttpResponseRedirect("%sevolve/results/" % pattern.get_absolute_url())
+
+@login_required
+def evolve_pattern_results(request, pattern_id):
+    pattern = get_object_or_404(Pattern, pk=pattern_id, author__pk=request.user.id)
     instruments = pattern.instruments.order_by('sequence_number')
     instruments = [[instrument.name] for instrument in instruments]
-
-    best_pattern = evolve_beats.main(pattern_id)
-    best_pattern = best_pattern.genes.tolist()
     
-    for i in xrange(len(instruments)):
-        instruments[i].extend(best_pattern[i])
-    best_pattern = instruments
+    statfile = "/home/huddlej/fitbeats/testData.txt"
+    fhandle = open(statfile, "r")
+    data = pickle.load(fhandle)
+    fhandle.close()
+
+    if isinstance(data, dict) and data.has_key('is_done'):
+        is_done = data['is_done']
+        best_pattern = data['best_pattern']    
+        best_pattern = best_pattern.genes.tolist()
+        
+        for i in xrange(len(instruments)):
+            instruments[i].extend(best_pattern[i])
+        best_pattern = instruments
+    else:
+        best_pattern = []
+        is_done = False
     
     title = heading = "Best Pattern"
     context = {'title': title,
                'heading': heading,
                'pattern': pattern,
                'best_pattern': best_pattern,
+               'is_done': is_done,
                }
     return render_to_response('fitbeats/evolve_pattern_results.html',
                               context,
