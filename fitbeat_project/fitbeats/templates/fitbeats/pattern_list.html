@@ -2,11 +2,12 @@
 
 {% block content %}
     <ul id="subnavigation">
+        <li class="nav_add"><a href="{% url add_pattern %}">Add Pattern</a></li>
     </ul>
 
     <ul>
     {% for pattern in pattern_list %}
-        <li><a href="{% url fitbeats.views.edit_pattern pattern.id %}">{{pattern}}</a></li>
+        <li class="nav_record"><a href="{% url fitbeats.views.edit_pattern pattern.id %}">{{pattern}}</a></li>
     {% endfor %}
     </ul>
 {% endblock %}

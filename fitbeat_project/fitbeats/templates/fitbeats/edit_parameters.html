@@ -1,11 +1,11 @@
 {% extends "fitbeats/base.html" %}
 
 {% block content %}
-    <h2>{{pattern}}</h2>
-
     <ul id="subnavigation">
-        <li><a href="{% url fitbeats.views.edit_pattern pattern.id %}">Back to Pattern</a></li>
+        <li class="nav_back"><a href="{% url fitbeats.views.edit_pattern pattern.id %}">Back to Pattern</a></li>
     </ul>
+
+    <h2>{{pattern}}</h2>
     
     {% if errors %}
         <p class="errornote">

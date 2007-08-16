@@ -15,7 +15,7 @@ pattern_info_dict = dict(base_generic_dict,
 
 urlpatterns = patterns('',
     url(r'^patterns/$', object_list, pattern_info_dict, name='view_patterns'),
-    (r'^patterns/add/$', 'fitbeats.views.add_pattern'),
+    url(r'^patterns/add/$', 'fitbeats.views.add_pattern', name='add_pattern'),
     (r'^patterns/(\d+)/$', 'fitbeats.views.edit_pattern'),
     (r'^patterns/(\d+)/trajectories/$', 'fitbeats.views.view_trajectories'),
     url(r'^patterns/(\d+)/trajectories/add/(\w+)/$', 'fitbeats.views.add_trajectory', name='add_trajectory'),

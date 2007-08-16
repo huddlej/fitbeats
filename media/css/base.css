@@ -63,3 +63,23 @@ form p input,select {
     font-weight: bold;
     margin-right: 5px;
 }
+
+li.nav_add {
+    list-style-image: url(/site_media/icons/add.png);
+}
+
+li.nav_edit {
+    list-style-image: url(/site_media/icons/table_edit.png);
+}
+
+li.nav_back {
+    list-style-image: url(/site_media/icons/arrow_left.png);
+}
+
+li.nav_record {
+    list-style-image: url(/site_media/icons/table.png);
+}
+
+li.nav_evolve {
+    list-style-image: url(/site_media/icons/cog_go.png);
+}

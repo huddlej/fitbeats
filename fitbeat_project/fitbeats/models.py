@@ -113,7 +113,7 @@ class Pattern(models.Model):
 
     def save(self):
         # Create parameters for new patterns
-        if self.id is None or self.parameters.count() == 0:
+        if self.id and self.parameters.count() == 0:
             for key in self.DEFAULT_VALUES.keys():
                 for name in self.DEFAULT_VALUES[key].keys():
                     p = Parameter(name="%s_%s" % (key, name), 

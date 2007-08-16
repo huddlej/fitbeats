@@ -1,15 +1,15 @@
 {% extends "fitbeats/base.html" %}
 
 {% block content %}
-    <h2>{{pattern}}</h2>
-
     <ul id="subnavigation">
-        <li><a href="{% url fitbeats.views.view_trajectories pattern.id %}">Back to Trajectories</a></li>
+        <li class="nav_back"><a href="{% url fitbeats.views.view_trajectories pattern.id %}">Back to Trajectories</a></li>
         {% for t in trajectory_types %}
-            <li{% ifequal trajectory_type t.0 %} class="selected"{% endifequal %}><a href="{% url add_trajectory pattern.id,t.0 %}">Add {{t.1}} Trajectory</a></li>
+            <li class="nav_add{% ifequal trajectory_type t.0 %} selected{% endifequal %}"><a href="{% url add_trajectory pattern.id,t.0 %}">Add {{t.1}} Trajectory</a></li>
         {% endfor %}
     </ul>
     
+    <h2>{{pattern}}</h2>
+
     {% if errors %}
         <p class="errornote">
         Please correct the error below.
