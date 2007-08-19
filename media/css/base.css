@@ -83,3 +83,17 @@ li.nav_record {
 li.nav_evolve {
     list-style-image: url(/site_media/icons/cog_go.png);
 }
+
+.pattern_result {
+    margin-top: 20px;
+}
+
+.pattern_result td {
+    font: 12px Georgia;
+    padding: 2px;
+}
+
+.pattern_result th {
+    font: bold 12px Georgia;
+    padding: 2px;
+}

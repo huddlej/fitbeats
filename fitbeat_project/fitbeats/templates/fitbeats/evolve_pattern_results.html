@@ -1,19 +1,30 @@
-{% if not is_done %}
-    {% block extrahead %}
-    <meta http-equiv="refresh" content="7">
-    {% endblock %}
-{% endif %}
+{% extends "fitbeats/base.html" %}
+
+{% block extrahead %}
+    {% if not is_done %}
+        <meta http-equiv="refresh" content="1">
+    {% endif %}
+{% endblock %}
 
 {% block content %}
+    <div>
+        <p>Generation: {{generation}}</p>
+        {% if not is_done %}
+            Running...
+        {% else %}
+            Done!
+        {% endif %}
+    </div>
+
     {% if best_pattern %}
-        <table border=1>
+        <table class="pattern_result" border=1>
         {% for row in best_pattern %}
             <tr>
 	        {% for column in row %}
 		    {% if forloop.first %}
-		        <td>{{column}}</td>
+		        <th>{{column}}</th>
 		    {% else %}
-		    	<td>{% ifequal column 1 %}x{% else %}&nbsp;{% endifequal %}</td>
+		    	<td width="10px">{% ifequal column 1 %}x{% else %}&nbsp;{% endifequal %}</td>
 		    {% endif %}
 		{% endfor %}
             </tr>

@@ -1,6 +1,6 @@
-import os
 import pickle
 import random
+import subprocess
 from xml.dom.minidom import parse
 from django import newforms as forms
 from django.db import transaction
@@ -14,6 +14,7 @@ from fitbeat_project.fitbeats.widgets import TextHiddenInput
 import evolve_beats
 
 COORDINATE_TRAJECTORY_NAMES = ('Initial', 'Control Point 1', 'Control Point 2', 'Final')
+STATFILE = "/home/huddlej/fitbeats/testData.txt"
 
 def index(request):
     try:
@@ -328,39 +329,59 @@ edit_parameters = transaction.commit_manually(edit_parameters)
 @login_required
 def evolve_pattern(request, pattern_id):
     pattern = get_object_or_404(Pattern, pk=pattern_id, author__pk=request.user.id)
-    os.spawnv(os.P_NOWAIT, "python", ("/home/huddlej/fitbeats/evolve_beats.py", pattern_id))
-    return HttpResponseRedirect("%sevolve/results/" % pattern.get_absolute_url())
-
-@login_required
-def evolve_pattern_results(request, pattern_id):
-    pattern = get_object_or_404(Pattern, pk=pattern_id, author__pk=request.user.id)
-    instruments = pattern.instruments.order_by('sequence_number')
-    instruments = [[instrument.name] for instrument in instruments]
     
-    statfile = "/home/huddlej/fitbeats/testData.txt"
-    fhandle = open(statfile, "r")
-    data = pickle.load(fhandle)
+    # Clear the existing data
+    fhandle = open(STATFILE, "w")
     fhandle.close()
-
-    if isinstance(data, dict) and data.has_key('is_done'):
-        is_done = data['is_done']
-        best_pattern = data['best_pattern']    
-        best_pattern = best_pattern.genes.tolist()
-        
-        for i in xrange(len(instruments)):
-            instruments[i].extend(best_pattern[i])
-        best_pattern = instruments
-    else:
-        best_pattern = []
-        is_done = False
     
-    title = heading = "Best Pattern"
+    title = heading = "Evolve Pattern"
     context = {'title': title,
                'heading': heading,
                'pattern': pattern,
+               }
+    return render_to_response('fitbeats/evolve.html',
+                              context,
+                              context_instance=RequestContext(request))
+
+@login_required
+def evolve_pattern_display(request, pattern_id):
+    pattern = get_object_or_404(Pattern, pk=pattern_id, author__pk=request.user.id)
+    instruments = pattern.instruments.order_by('sequence_number')
+    instruments = [[instrument.name] for instrument in instruments]
+
+    try:
+        fhandle = open(STATFILE, "r")
+        data = pickle.load(fhandle)
+        fhandle.close()
+
+        if isinstance(data, dict) and data.has_key('is_done'):
+            is_done = data['is_done']
+            best_pattern = data['best_pattern']    
+            best_pattern = best_pattern.genes.tolist()
+            
+            for i in xrange(len(instruments)):
+                instruments[i].extend(best_pattern[i])
+            best_pattern = instruments
+            generation = data['generation']
+        else:
+            raise Exception
+    except:
+        best_pattern = []
+        is_done = False
+        generation = 0
+    
+    title = heading = "Best Pattern"
+    context = {'pattern': pattern,
                'best_pattern': best_pattern,
                'is_done': is_done,
+               'generation': generation
                }
     return render_to_response('fitbeats/evolve_pattern_results.html',
                               context,
                               context_instance=RequestContext(request))
+
+@login_required
+def evolve_pattern_run(request, pattern_id):
+    pattern = get_object_or_404(Pattern, pk=pattern_id, author__pk=request.user.id)
+    pid = subprocess.Popen(["python", "/home/huddlej/fitbeats/evolve_beats.py", str(pattern_id)]).pid
+    return HttpResponse("Finished running %i" % pid)

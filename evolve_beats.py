@@ -158,7 +158,7 @@ def main(pattern_id=None):
     lastBestCount = 0
     i = 0
     statfile = "/home/huddlej/fitbeats/testData.txt"
-    
+
     while i < max_generations:
         try:
             b = ph.best()
