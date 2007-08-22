@@ -127,6 +127,7 @@ def main(pattern_id=None):
     PatternOrganism.mutProb = parameters['organism_mutation_probability']
     PatternOrganism.crossoverRate = parameters['organism_crossover_rate']
     PatternOrganism.instrument_length = instrument_length
+    PatternOrganism.instruments = pattern.instruments.all()
     PatternOrganism.length = length
     PatternOrganism.crossover = crossover()
     PatternOrganism.mutators = mutators

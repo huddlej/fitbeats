@@ -9,6 +9,8 @@ def savePatternToXml(pattern, fileobject, debug=False):
     Open the Hydrogen song template, write the new beats,
     and save the resulting XML into a new file.
     
+    TODO: pass a PatternOrganism so we have access to pattern array AND instruments
+    
     @param NumericArray pattern
     @param string filename
     @param boolean debug whether if true, will print xml instead of saving to file
@@ -22,7 +24,7 @@ def savePatternToXml(pattern, fileobject, debug=False):
     size = int(xml_pattern.getElementsByTagName("size")[0].childNodes[0].nodeValue)
     increment = size / pattern_length
 
-    for row in xrange(instrument_length - 1, 0, -1):
+    for row in xrange(instrument_length):
         """
         At the beginning of a new pattern line, increment the instrument
         and select the next note list.

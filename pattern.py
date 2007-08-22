@@ -42,10 +42,13 @@ class PatternOrganism(Organism):
                                     for j in xrange(self.instrument_length)], 'O')
     
     def __repr__(self):
-        return str(self.genes)
-
+        return self.__str__()
+    
     def __str__(self):
-        return str(self.genes)
+        output = ""
+        for i in xrange(Numeric.shape(self.genes)[0] - 1, -1, -1):
+            output += "%s %s\n" % (str(self.instruments[i]).ljust(20), " ".join(map(str, self.genes[i].tolist())))
+        return output
 
     def __len__(self):
         return self.length
