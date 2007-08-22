@@ -157,10 +157,10 @@ class PatternOrganism(Organism):
         return mutant
         
     def xmlDump(self, fileobject):
-        savePatternToXml(self, self.length, fileobject, False)
+        savePatternToXml(self.genes, fileobject, False)
 
     def xmlDumps(self):
-        savePatternToXml(self, self.length, "", True)
+        savePatternToXml(self.genes, None, True)
 
 class PatternPopulation(Population):
     """

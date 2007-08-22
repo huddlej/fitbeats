@@ -18,17 +18,21 @@
 
     {% if best_pattern %}
         <table class="pattern_result" border=1>
-        {% for row in best_pattern %}
-            <tr>
-	        {% for column in row %}
-		    {% if forloop.first %}
-		        <th>{{column}}</th>
-		    {% else %}
-		    	<td width="10px">{% ifequal column 1 %}x{% else %}&nbsp;{% endifequal %}</td>
-		    {% endif %}
-		{% endfor %}
-            </tr>
-	{% endfor %}
-	</table>
+            {% for row in best_pattern %}
+                <tr>
+                {% for column in row %}
+                    {% if forloop.first %}
+                        <th>{{column}}</th>
+                    {% else %}
+                        <td width="10px">{% ifequal column 1 %}x{% else %}&nbsp;{% endifequal %}</td>
+                    {% endif %}
+                {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+        
+        <div>
+            <p>Best Fitness: {{fitness}}</p>
+        </div>
     {% endif %}
 {% endblock %}
