@@ -163,7 +163,8 @@ class PatternOrganism(Organism):
         savePatternToXml(self, fileobject, False)
 
     def xmlDumps(self):
-        savePatternToXml(self, None, True)
+        song = savePatternToXml(self, None, True)
+        return song.toxml()
 
 class PatternPopulation(Population):
     """

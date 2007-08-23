@@ -283,8 +283,16 @@ class FitnessTrajectoryFloat(models.Model):
     class Admin:
         pass
 
+class PatternInstance(models.Model):
+    pattern = models.ForeignKey(Pattern, editable=False)
+    fitness = models.FloatField()
+    value = models.TextField()
+    
+    class Admin:
+        pass
+
 """
-class PatternInstance:
+class PatternInstanceComplete:
     length = models.IntegerField(help_text="The number of beats in this pattern.")
     instrument_length = models.IntegerField(editable=False)
     instruments = models.TextField(help_text="Instruments used for this pattern.")

@@ -25,5 +25,7 @@ urlpatterns = patterns('',
     (r'^patterns/(\d+)/evolve/$', 'fitbeats.views.evolve_pattern'),
     (r'^patterns/(\d+)/evolve/run/$', 'fitbeats.views.evolve_pattern_run'),
     (r'^patterns/(\d+)/evolve/display/$', 'fitbeats.views.evolve_pattern_display'),
+    (r'^patterns/(\d+)/evolve/stop/$', 'fitbeats.views.evolve_pattern_stop'),
+    (r'^patterns/instances/(\d+)/$', 'fitbeats.views.view_pattern_instance'),
     (r'^$', 'fitbeats.views.index'),
 )

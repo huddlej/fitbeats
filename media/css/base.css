@@ -84,6 +84,10 @@ li.nav_evolve {
     list-style-image: url(/site_media/icons/cog_go.png);
 }
 
+li.nav_cancel {
+    list-style-image: url(/site_media/icons/cross.png);
+}
+
 .pattern_result {
     margin-top: 20px;
 }

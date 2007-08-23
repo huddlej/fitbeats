@@ -3,8 +3,9 @@
 {% block content %}
     <ul id="subnavigation">
         <li class="nav_back"><a href="{% url fitbeats.views.edit_pattern pattern.id %}">Back to Pattern</a></li>
+        <li class="nav_cancel"><a href="stop/" target="display">Cancel Evolve Pattern</a></li>
     </ul>
     
     <iframe src="run/" style="display: none;"></iframe>
-    <iframe src="display/" style="border: 0px; width: 800px; height: 300px;"></iframe>
+    <iframe src="display/" name="display" style="border: 0px; width: 800px; height: 300px;"></iframe>
 {% endblock %}

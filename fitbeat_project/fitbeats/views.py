@@ -1,6 +1,7 @@
 import pickle
 import random
 import subprocess
+import signal
 from xml.dom.minidom import parse
 from django import newforms as forms
 from django.db import transaction
@@ -15,6 +16,7 @@ import evolve_beats
 
 COORDINATE_TRAJECTORY_NAMES = ('Initial', 'Control Point 1', 'Control Point 2', 'Final')
 STATFILE = "/home/huddlej/fitbeats/testData.txt"
+STOPFILE = "/home/huddlej/fitbeats/stopfile.txt"
 
 def index(request):
     try:
@@ -334,6 +336,9 @@ def evolve_pattern(request, pattern_id):
     fhandle = open(STATFILE, "w")
     fhandle.close()
     
+    fhandle = open(STOPFILE, "w")
+    fhandle.close()
+    
     title = heading = "Evolve Pattern"
     context = {'title': title,
                'heading': heading,
@@ -346,6 +351,7 @@ def evolve_pattern(request, pattern_id):
 @login_required
 def evolve_pattern_display(request, pattern_id):
     pattern = get_object_or_404(Pattern, pk=pattern_id, author__pk=request.user.id)
+    pattern_instances = pattern.patterninstance_set.all()
     instruments = pattern.instruments.order_by('sequence_number')
     instruments = [[instrument.name] for instrument in instruments]
 
@@ -376,6 +382,7 @@ def evolve_pattern_display(request, pattern_id):
     
     title = heading = "Best Pattern"
     context = {'pattern': pattern,
+               'pattern_instances': pattern_instances,
                'best_pattern': best_pattern,
                'is_done': is_done,
                'fitness': fitness,
@@ -388,6 +395,29 @@ def evolve_pattern_display(request, pattern_id):
 
 @login_required
 def evolve_pattern_run(request, pattern_id):
+    pattern = get_object_or_404(Pattern, pk=pattern_id, author__pk=request.user.id)    
+    request.session[str(pattern_id)] = subprocess.Popen(["python", 
+                                                         "/home/huddlej/fitbeats/evolve_beats.py",
+                                                         "-d",
+                                                         str(pattern_id)]).pid
+    return HttpResponse("Finished evolving pattern %s." % pattern)
+
+@login_required
+def evolve_pattern_stop(request, pattern_id):
     pattern = get_object_or_404(Pattern, pk=pattern_id, author__pk=request.user.id)
-    pid = subprocess.Popen(["python", "/home/huddlej/fitbeats/evolve_beats.py", str(pattern_id)]).pid
-    return HttpResponse("Finished running %i" % pid)
+    
+    stop = True
+    fhandle = open(STOPFILE, "w")
+    pickle.dump(stop, fhandle)
+    fhandle.close()
+
+    return HttpResponseRedirect("%sevolve/display/" % pattern.get_absolute_url())
+    
+@login_required
+def view_pattern_instance(request, instance_id):
+    instance = get_object_or_404(PatternInstance, pk=instance_id)
+    response = HttpResponse(mimetype="text/xml")
+    response['Content-Disposition'] = 'attachment; filename=yoursong.h2song'
+    response.write(instance.value)
+    
+    return response

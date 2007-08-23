@@ -1,0 +1,15 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+ "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+   <link rel="stylesheet" href="/site_media/css/{% block css %}base{% endblock %}.css" type="text/css">
+   {% block extrahead %}{% endblock %}
+</head>
+<body>
+<div id="doc" class="yui-t1">
+    <h1>{% if heading %}{{heading}}{% endif %}</h1>
+
+    {% block content %}{% endblock %}
+</div>
+</body>
+</html>

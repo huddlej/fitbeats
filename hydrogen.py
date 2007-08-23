@@ -72,7 +72,8 @@ def savePatternToXml(pattern, fileobject, debug=False):
             noteList.appendChild(note)
         
     if debug:
-        return song.toprettyxml()
+        print "Debug..."
+        return song
     else:
         song.writexml(fileobject)
         

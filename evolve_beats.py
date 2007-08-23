@@ -18,7 +18,7 @@ from pattern import PatternGene, PatternOrganism, PatternPopulation
 from fitbeat_project.fitbeats.models import *
 from selector import RouletteSelector, TournamentSelector, NewRouletteSelector
 from crossover import OnePointCrossover
-        
+
 def main(pattern_id=None):
     if pattern_id:
         return_best = True
@@ -36,6 +36,9 @@ def main(pattern_id=None):
     parser.add_option("-o", "--output",
                       dest="songfile", type="string", default=None,
                       help="a filename for the song output")
+    parser.add_option("-d",
+                      dest="database_dump", action="store_true", default=False,
+                      help="dump best pattern to database")
     parser.add_option("-l",
                       dest="limit_mutation", action="store_true", default=False,
                       help="limit mutation based on fitness value and mutator impact")
@@ -72,6 +75,7 @@ def main(pattern_id=None):
     
     # Set option variables    
     limit_mutation = options.limit_mutation
+    database_dump = options.database_dump
     quiet = options.quiet
     statfile = options.statfile
     songfile = options.songfile
@@ -154,13 +158,24 @@ def main(pattern_id=None):
         #print parameters
     
     stats = {}
-
+    webstats = None
     lastBest = 1000
     lastBestCount = 0
     i = 0
     statfile = "/home/huddlej/fitbeats/testData.txt"
+    stopfile = "/home/huddlej/fitbeats/stopfile.txt"
 
     while i < max_generations:
+        # Check for file-based exit command.
+        if database_dump:
+            try:
+                fhandle = open(stopfile, "r")
+                stop = pickle.load(fhandle)
+                if stop:
+                    break
+            except:
+                pass
+    
         try:
             b = ph.best()
             
@@ -199,10 +214,17 @@ def main(pattern_id=None):
         except KeyboardInterrupt:
             break
 
-    webstats['is_done'] = True
-    fhandle = open(statfile, "w")
-    pickle.dump(webstats, fhandle)
-    fhandle.close()
+    if database_dump:
+        p = PatternInstance(pattern=pattern,
+                            fitness=b.fitness(),
+                            value=b.xmlDumps())
+        p.save()
+    
+    if webstats:
+        webstats['is_done'] = True
+        fhandle = open(statfile, "w")
+        pickle.dump(webstats, fhandle)
+        fhandle.close()
             
     if not quiet:
         print "Stopped:\n%f" % lastBest
@@ -223,9 +245,6 @@ def main(pattern_id=None):
     else:
         if not quiet:
             print "No file written."
-
-    if return_best:
-        return ph.best()
         
 if __name__ == '__main__':
     main()
