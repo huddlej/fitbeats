@@ -1,7 +1,6 @@
 from xml.dom.minidom import parse
 import Numeric
 
-pattern = Numeric.array([[1, 0, 1, 0], [0, 1, 0, 1]])
 SONG_TEMPLATE_PATH = "/home/huddlej/fitbeats/song_template.h2song"
 
 def savePatternToXml(pattern, fileobject, debug=False):
@@ -9,18 +8,18 @@ def savePatternToXml(pattern, fileobject, debug=False):
     Open the Hydrogen song template, write the new beats,
     and save the resulting XML into a new file.
     
-    TODO: pass a PatternOrganism so we have access to pattern array AND instruments
-    
-    @param NumericArray pattern
+    @param PatternOrganism pattern
     @param string filename
     @param boolean debug whether if true, will print xml instead of saving to file
     """
-    (instrument_length, pattern_length) = Numeric.shape(pattern)
-    pattern = pattern.tolist()
+    pattern_length = pattern.length
+    instrument_length = pattern.instrument_length
+    pattern_genes = pattern.genes.tolist()
+    instruments = [i.sequence_number for i in pattern.instruments]
+    
     song = parse(SONG_TEMPLATE_PATH)
     xml_pattern = song.getElementsByTagName("pattern")[0]
     
-    instrument_value = -1
     size = int(xml_pattern.getElementsByTagName("size")[0].childNodes[0].nodeValue)
     increment = size / pattern_length
 
@@ -29,11 +28,11 @@ def savePatternToXml(pattern, fileobject, debug=False):
         At the beginning of a new pattern line, increment the instrument
         and select the next note list.
         """
-        instrument_value += 1
+        instrument_value = instruments[row]
         noteList = xml_pattern.getElementsByTagName("noteList")[instrument_value]
 
         for column in xrange(pattern_length):                
-            if(pattern[row][column] == 0):
+            if(pattern_genes[row][column] == 0):
                 """
                 Don't add notes for silence
                 """
@@ -73,11 +72,24 @@ def savePatternToXml(pattern, fileobject, debug=False):
             noteList.appendChild(note)
         
     if debug:
-        print song.toprettyxml()
+        return song.toprettyxml()
     else:
         song.writexml(fileobject)
         
 if __name__ == "__main__":
+    class Instrument(object):
+        def __init__(self, sequence_number):
+            self.sequence_number = sequence_number
+
+    class PatternOrganism(object):
+        pass
+
+    pattern = PatternOrganism()
+    pattern.genes = Numeric.array([[1, 0, 1, 0], [0, 1, 0, 1]])
+    pattern.length = Numeric.shape(pattern.genes)[1]
+    pattern.instruments = [Instrument(1), Instrument(5)]
+    pattern.instrument_length = len(pattern.instruments)
+
     fhandle = open("test.h2song", "w")
     savePatternToXml(pattern, fhandle)
     #savePatternToXml(pattern, None, True)
