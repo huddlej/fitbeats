@@ -178,6 +178,7 @@ def main(pattern_id=None):
     
         try:
             b = ph.best()
+            diversity = ph.diversity()
             #b = ph.worst()
             
             if not quiet:
@@ -185,11 +186,12 @@ def main(pattern_id=None):
                                                                                  repr(b),
                                                                                  b.fitness(),
                                                                                  ph.fitness(),
-                                                                                 ph.diversity())
+                                                                                 diversity)
             
             stats[i] = {'generation': i, 
                         'bestfitness': b.fitness(), 
                         'popfitness': ph.fitness(),
+                        'diversity': diversity,
                         'best_pattern': b,
                         'is_done': False}
             webstats = stats[i]            

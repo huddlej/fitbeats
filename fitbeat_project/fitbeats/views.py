@@ -364,6 +364,7 @@ def evolve_pattern_display(request, pattern_id):
             is_done = data['is_done']
             fitness = data['bestfitness']
             population_fitness = data['popfitness']
+            diversity = data['diversity']
             best_pattern = data['best_pattern']    
             best_pattern = best_pattern.genes.tolist()
             
@@ -378,6 +379,7 @@ def evolve_pattern_display(request, pattern_id):
         is_done = False
         fitness = None
         population_fitness = None
+        diversity = None
         generation = 0
     
     title = heading = "Best Pattern"
@@ -387,6 +389,7 @@ def evolve_pattern_display(request, pattern_id):
                'is_done': is_done,
                'fitness': fitness,
                'population_fitness': population_fitness,
+               'diversity': diversity,
                'generation': generation
                }
     return render_to_response('fitbeats/evolve_pattern_results.html',

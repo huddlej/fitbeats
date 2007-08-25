@@ -33,14 +33,16 @@
         
         <div>
             <p>Best Fitness: {{fitness}}</p>
+            <p>Population Fitness: {{population_fitness}}</p>
+            <p>Diversity: {{diversity}}</p>
         </div>
         
         {% if pattern_instances.count %}
-        <ul>
+        <ol>
             {% for p in pattern_instances %}
                 <li><a href="{% url fitbeats.views.view_pattern_instance p.id %}">{{p.fitness}}</a></li>
             {% endfor %}
-        </ul>
+        </ol>
         {% endif %}
     {% endif %}
 {% endblock %}
