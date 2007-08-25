@@ -178,6 +178,7 @@ def main(pattern_id=None):
     
         try:
             b = ph.best()
+            #b = ph.worst()
             
             if not quiet:
                 print "generation %i:\n%s best=%f, average=%f, diversity=%f)" % (i, 

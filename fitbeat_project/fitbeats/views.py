@@ -421,3 +421,39 @@ def view_pattern_instance(request, instance_id):
     response.write(instance.value)
     
     return response
+
+def xmltest(request, ft_id):
+    bezFilename = "/home/huddlej/fitbeats/media/xmltest.xml"
+    ft = get_object_or_404(FitnessTrajectory, id=ft_id)
+    patternLength = ft.piece.parameter_set.filter(name="patternLength")[0].value
+
+    rowMax = 100
+    xScale = 200 / patternLength
+    yScale = 10
+    
+    x1 = 0
+    y1 = rowMax - (ft.initialValue * yScale)
+    
+    x2 = (patternLength - 1) * xScale
+    y2 = rowMax - (ft.finalValue * yScale)
+
+    cx1 = ft.ctlPt1x * xScale
+    cy1 = rowMax - (ft.ctlPt1y * yScale)
+
+    cx2 = ft.ctlPt2x * xScale
+    cy2 = rowMax - (ft.ctlPt2y * yScale)
+    
+    bez = parse(bezFilename)
+    bezsh = bez.getElementsByTagName("shape")[0]
+    
+    vals = ["x1", "y1", "x2", "y2", "cx1", "cy1", "cx2", "cy2"]
+    
+    for val in vals:
+        bezsh.setAttribute(val, str(eval(val)))
+
+    #print bez.toxml()
+    bezFile = open(bezFilename, "w")
+    bez.writexml(bezFile)
+    bezFile.close()
+    return HttpResponseRedirect('/site_media/xmltest.xml')
+    return HttpResponseRedirect('/xml/')

@@ -208,7 +208,7 @@ class PatternPopulation(Population):
             parent1 = parent2 = choice(parents)
         
             # Choose second parent not equal to first parent
-            maxwait = 100
+            maxwait = 200
             i = 0
             while parent1.genes.tolist() == parent2.genes.tolist():
                 if i > maxwait:
@@ -230,3 +230,6 @@ class PatternPopulation(Population):
 
         # Set parents and children as the new population
         self.organisms = children
+
+    def worst(self):
+        return max(self)
