@@ -33,4 +33,10 @@
 
     <input type="submit" value="Save" />
     </form>
+
+    {% ifequal trajectory.trajectory_type "coordinate" %}
+        <div style="position: relative; left: 325px; top: -214px;">
+            <iframe src="{% url fitbeats.views.xml_trajectory pattern.id,trajectory.id %}" width="300px" height="100%"></iframe>
+        </div>
+    {% endifequal %}
 {% endblock %}

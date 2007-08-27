@@ -258,6 +258,7 @@ def edit_trajectory(request, pattern_id, id):
     context = {'title': title, 
                'heading': heading,
                'pattern': pattern,
+               'trajectory': trajectory,
                'trajectory_type': trajectory_type,
                'trajectory_types': TRAJECTORY_TYPES,
                'form': form,
@@ -425,27 +426,30 @@ def view_pattern_instance(request, instance_id):
     
     return response
 
-def xmltest(request, ft_id):
+def xml_trajectory(request, pattern_id, id):
     bezFilename = "/home/huddlej/fitbeats/media/xmltest.xml"
-    ft = get_object_or_404(FitnessTrajectory, id=ft_id)
-    patternLength = ft.piece.parameter_set.filter(name="patternLength")[0].value
+    pattern = get_object_or_404(Pattern, pk=pattern_id, author__pk=request.user.id)
+    trajectory = get_object_or_404(FitnessTrajectory, pk=id, pattern__pk=pattern_id)
 
-    rowMax = 100
-    xScale = 200 / patternLength
+    pattern.length = pattern.length
+    trajectory_set = trajectory.trajectory_set
+
+    rowMax = 150
+    xScale = 280 / pattern.length
     yScale = 10
     
-    x1 = 0
-    y1 = rowMax - (ft.initialValue * yScale)
+    x1 = trajectory_set[0].x
+    y1 = rowMax - (trajectory_set[0].y * yScale)
     
-    x2 = (patternLength - 1) * xScale
-    y2 = rowMax - (ft.finalValue * yScale)
+    cx1 = trajectory_set[1].x * xScale
+    cy1 = rowMax - (trajectory_set[1].y * yScale)
 
-    cx1 = ft.ctlPt1x * xScale
-    cy1 = rowMax - (ft.ctlPt1y * yScale)
+    cx2 = trajectory_set[2].x * xScale
+    cy2 = rowMax - (trajectory_set[2].y * yScale)
 
-    cx2 = ft.ctlPt2x * xScale
-    cy2 = rowMax - (ft.ctlPt2y * yScale)
-    
+    x2 = trajectory_set[3].x * xScale
+    y2 = rowMax - (trajectory_set[3].y * yScale)
+
     bez = parse(bezFilename)
     bezsh = bez.getElementsByTagName("shape")[0]
     

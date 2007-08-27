@@ -208,11 +208,12 @@ class PatternPopulation(Population):
             parent1 = parent2 = choice(parents)
         
             # Choose second parent not equal to first parent
-            maxwait = 200
+            maxwait = 400
             i = 0
             while parent1.genes.tolist() == parent2.genes.tolist():
                 if i > maxwait:
-                    raise Exception("Waited too long for a different parent.")
+                    # Try another random set of parents if the first one didn't work.
+                    parent1 = parent2 = choice(parents)
                 parent2 = choice(parents)
                 i += 1
         
