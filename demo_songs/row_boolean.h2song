@@ -1,7 +1,7 @@
-<?xml version="1.0" ?><song>
+<song>
     <version>0.9.3</version>
     <bpm>120</bpm>
-    <volume>0.73</volume>
+    <volume>0.2</volume>
     <metronomeVolume>0.5</metronomeVolume>
     <name>Untitled Song</name>
     <author>Unknown</author>
@@ -35,7 +35,7 @@
             <Sustain>1</Sustain>
             <Release>1000</Release>
             <randomPitchFactor>0</randomPitchFactor>
-            <exclude/>
+            <exclude />
             <layer>
                 <filename>kick_Dry_b.flac</filename>
                 <min>0</min>
@@ -63,7 +63,7 @@
             <Sustain>1</Sustain>
             <Release>1000</Release>
             <randomPitchFactor>0</randomPitchFactor>
-            <exclude/>
+            <exclude />
             <layer>
                 <filename>stick_Woody.flac</filename>
                 <min>0</min>
@@ -91,7 +91,7 @@
             <Sustain>1</Sustain>
             <Release>1000</Release>
             <randomPitchFactor>0</randomPitchFactor>
-            <exclude/>
+            <exclude />
             <layer>
                 <filename>sn_Jazz_c.flac</filename>
                 <min>0</min>
@@ -119,7 +119,7 @@
             <Sustain>1</Sustain>
             <Release>1000</Release>
             <randomPitchFactor>0</randomPitchFactor>
-            <exclude/>
+            <exclude />
             <layer>
                 <filename>clap_Dry_c.flac</filename>
                 <min>0</min>
@@ -147,7 +147,7 @@
             <Sustain>1</Sustain>
             <Release>1000</Release>
             <randomPitchFactor>0</randomPitchFactor>
-            <exclude/>
+            <exclude />
             <layer>
                 <filename>sn_Wet_b.flac</filename>
                 <min>0</min>
@@ -175,7 +175,7 @@
             <Sustain>1</Sustain>
             <Release>1000</Release>
             <randomPitchFactor>0</randomPitchFactor>
-            <exclude/>
+            <exclude />
             <layer>
                 <filename>tom_Rock_lo.flac</filename>
                 <min>0</min>
@@ -203,7 +203,7 @@
             <Sustain>1</Sustain>
             <Release>1000</Release>
             <randomPitchFactor>0</randomPitchFactor>
-            <exclude/>
+            <exclude />
             <layer>
                 <filename>hhc_Dry_a.flac</filename>
                 <min>0</min>
@@ -231,7 +231,7 @@
             <Sustain>1</Sustain>
             <Release>1000</Release>
             <randomPitchFactor>0</randomPitchFactor>
-            <exclude/>
+            <exclude />
             <layer>
                 <filename>tom_Rock_mid.flac</filename>
                 <min>0</min>
@@ -259,7 +259,7 @@
             <Sustain>1</Sustain>
             <Release>1000</Release>
             <randomPitchFactor>0</randomPitchFactor>
-            <exclude/>
+            <exclude />
             <layer>
                 <filename>hhp_Dry_a.flac</filename>
                 <min>0</min>
@@ -287,7 +287,7 @@
             <Sustain>1</Sustain>
             <Release>1000</Release>
             <randomPitchFactor>0</randomPitchFactor>
-            <exclude/>
+            <exclude />
             <layer>
                 <filename>tom_Rock_hi.flac</filename>
                 <min>0</min>
@@ -315,7 +315,7 @@
             <Sustain>1</Sustain>
             <Release>1000</Release>
             <randomPitchFactor>0</randomPitchFactor>
-            <exclude/>
+            <exclude />
             <layer>
                 <filename>hhc_Rock_b.flac</filename>
                 <min>0</min>
@@ -343,7 +343,7 @@
             <Sustain>1</Sustain>
             <Release>1000</Release>
             <randomPitchFactor>0</randomPitchFactor>
-            <exclude/>
+            <exclude />
             <layer>
                 <filename>misc_Cowbell.flac</filename>
                 <min>0</min>
@@ -371,7 +371,7 @@
             <Sustain>1</Sustain>
             <Release>1000</Release>
             <randomPitchFactor>0</randomPitchFactor>
-            <exclude/>
+            <exclude />
             <layer>
                 <filename>cym_Jazz.flac</filename>
                 <min>0</min>
@@ -399,7 +399,7 @@
             <Sustain>1</Sustain>
             <Release>1000</Release>
             <randomPitchFactor>0</randomPitchFactor>
-            <exclude/>
+            <exclude />
             <layer>
                 <filename>cra_Rock_a.flac</filename>
                 <min>0</min>
@@ -427,7 +427,7 @@
             <Sustain>1</Sustain>
             <Release>1000</Release>
             <randomPitchFactor>0</randomPitchFactor>
-            <exclude/>
+            <exclude />
             <layer>
                 <filename>cym_Rock_b.flac</filename>
                 <min>0</min>
@@ -455,7 +455,7 @@
             <Sustain>1</Sustain>
             <Release>1000</Release>
             <randomPitchFactor>0</randomPitchFactor>
-            <exclude/>
+            <exclude />
             <layer>
                 <filename>cra_Jazz.flac</filename>
                 <min>0</min>
@@ -483,7 +483,7 @@
             <Sustain>1</Sustain>
             <Release>1000</Release>
             <randomPitchFactor>0</randomPitchFactor>
-            <exclude/>
+            <exclude />
         </instrument>
         <instrument>
             <id>17</id>
@@ -504,7 +504,7 @@
             <Sustain>1</Sustain>
             <Release>1000</Release>
             <randomPitchFactor>0</randomPitchFactor>
-            <exclude/>
+            <exclude />
         </instrument>
         <instrument>
             <id>18</id>
@@ -525,7 +525,7 @@
             <Sustain>1</Sustain>
             <Release>1000</Release>
             <randomPitchFactor>0</randomPitchFactor>
-            <exclude/>
+            <exclude />
         </instrument>
         <instrument>
             <id>19</id>
@@ -546,7 +546,7 @@
             <Sustain>1</Sustain>
             <Release>1000</Release>
             <randomPitchFactor>0</randomPitchFactor>
-            <exclude/>
+            <exclude />
         </instrument>
         <instrument>
             <id>20</id>
@@ -567,7 +567,7 @@
             <Sustain>1</Sustain>
             <Release>1000</Release>
             <randomPitchFactor>0</randomPitchFactor>
-            <exclude/>
+            <exclude />
         </instrument>
         <instrument>
             <id>21</id>
@@ -588,7 +588,7 @@
             <Sustain>1</Sustain>
             <Release>1000</Release>
             <randomPitchFactor>0</randomPitchFactor>
-            <exclude/>
+            <exclude />
         </instrument>
         <instrument>
             <id>22</id>
@@ -609,7 +609,7 @@
             <Sustain>1</Sustain>
             <Release>1000</Release>
             <randomPitchFactor>0</randomPitchFactor>
-            <exclude/>
+            <exclude />
         </instrument>
         <instrument>
             <id>23</id>
@@ -630,7 +630,7 @@
             <Sustain>1</Sustain>
             <Release>1000</Release>
             <randomPitchFactor>0</randomPitchFactor>
-            <exclude/>
+            <exclude />
         </instrument>
         <instrument>
             <id>24</id>
@@ -651,7 +651,7 @@
             <Sustain>1</Sustain>
             <Release>1000</Release>
             <randomPitchFactor>0</randomPitchFactor>
-            <exclude/>
+            <exclude />
         </instrument>
         <instrument>
             <id>25</id>
@@ -672,7 +672,7 @@
             <Sustain>1</Sustain>
             <Release>1000</Release>
             <randomPitchFactor>0</randomPitchFactor>
-            <exclude/>
+            <exclude />
         </instrument>
         <instrument>
             <id>26</id>
@@ -693,7 +693,7 @@
             <Sustain>1</Sustain>
             <Release>1000</Release>
             <randomPitchFactor>0</randomPitchFactor>
-            <exclude/>
+            <exclude />
         </instrument>
         <instrument>
             <id>27</id>
@@ -714,7 +714,7 @@
             <Sustain>1</Sustain>
             <Release>1000</Release>
             <randomPitchFactor>0</randomPitchFactor>
-            <exclude/>
+            <exclude />
         </instrument>
         <instrument>
             <id>28</id>
@@ -735,7 +735,7 @@
             <Sustain>1</Sustain>
             <Release>1000</Release>
             <randomPitchFactor>0</randomPitchFactor>
-            <exclude/>
+            <exclude />
         </instrument>
         <instrument>
             <id>29</id>
@@ -756,7 +756,7 @@
             <Sustain>1</Sustain>
             <Release>1000</Release>
             <randomPitchFactor>0</randomPitchFactor>
-            <exclude/>
+            <exclude />
         </instrument>
         <instrument>
             <id>30</id>
@@ -777,7 +777,7 @@
             <Sustain>1</Sustain>
             <Release>1000</Release>
             <randomPitchFactor>0</randomPitchFactor>
-            <exclude/>
+            <exclude />
         </instrument>
         <instrument>
             <id>31</id>
@@ -798,7 +798,7 @@
             <Sustain>1</Sustain>
             <Release>1000</Release>
             <randomPitchFactor>0</randomPitchFactor>
-            <exclude/>
+            <exclude />
         </instrument>
     </instrumentList>
     <patternList>
@@ -807,100 +807,428 @@
             <size>192</size>
             <sequenceList>
                 <sequence>
-                    <noteList><note><position>12</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>0</instrument></note><note><position>48</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>0</instrument></note><note><position>60</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>0</instrument></note><note><position>84</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>0</instrument></note><note><position>96</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>0</instrument></note><note><position>108</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>0</instrument></note><note><position>120</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>0</instrument></note><note><position>156</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>0</instrument></note><note><position>180</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>0</instrument></note></noteList>
+                    <noteList>
+                        <note>
+                            <position>12</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>0</instrument>
+                        </note>
+                        <note>
+                            <position>48</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>0</instrument>
+                        </note>
+                        <note>
+                            <position>60</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>0</instrument>
+                        </note>
+                        <note>
+                            <position>84</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>0</instrument>
+                        </note>
+                        <note>
+                            <position>96</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>0</instrument>
+                        </note>
+                        <note>
+                            <position>108</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>0</instrument>
+                        </note>
+                        <note>
+                            <position>120</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>0</instrument>
+                        </note>
+                        <note>
+                            <position>156</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>0</instrument>
+                        </note>
+                        <note>
+                            <position>180</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>0</instrument>
+                        </note>
+                    </noteList>
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList><note><position>0</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>3</instrument></note><note><position>24</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>3</instrument></note><note><position>36</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>3</instrument></note><note><position>48</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>3</instrument></note><note><position>72</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>3</instrument></note><note><position>96</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>3</instrument></note><note><position>144</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>3</instrument></note><note><position>168</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>3</instrument></note><note><position>180</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>3</instrument></note></noteList>
+                    <noteList>
+                        <note>
+                            <position>0</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>3</instrument>
+                        </note>
+                        <note>
+                            <position>24</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>3</instrument>
+                        </note>
+                        <note>
+                            <position>36</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>3</instrument>
+                        </note>
+                        <note>
+                            <position>48</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>3</instrument>
+                        </note>
+                        <note>
+                            <position>72</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>3</instrument>
+                        </note>
+                        <note>
+                            <position>96</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>3</instrument>
+                        </note>
+                        <note>
+                            <position>144</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>3</instrument>
+                        </note>
+                        <note>
+                            <position>168</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>3</instrument>
+                        </note>
+                        <note>
+                            <position>180</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>3</instrument>
+                        </note>
+                    </noteList>
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList><note><position>12</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>5</instrument></note><note><position>48</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>5</instrument></note><note><position>60</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>5</instrument></note><note><position>84</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>5</instrument></note><note><position>96</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>5</instrument></note><note><position>108</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>5</instrument></note><note><position>120</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>5</instrument></note><note><position>156</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>5</instrument></note><note><position>180</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>5</instrument></note></noteList>
+                    <noteList>
+                        <note>
+                            <position>12</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>5</instrument>
+                        </note>
+                        <note>
+                            <position>48</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>5</instrument>
+                        </note>
+                        <note>
+                            <position>60</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>5</instrument>
+                        </note>
+                        <note>
+                            <position>84</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>5</instrument>
+                        </note>
+                        <note>
+                            <position>96</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>5</instrument>
+                        </note>
+                        <note>
+                            <position>108</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>5</instrument>
+                        </note>
+                        <note>
+                            <position>120</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>5</instrument>
+                        </note>
+                        <note>
+                            <position>156</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>5</instrument>
+                        </note>
+                        <note>
+                            <position>180</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>5</instrument>
+                        </note>
+                    </noteList>
                 </sequence>
                 <sequence>
-                    <noteList><note><position>0</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>6</instrument></note><note><position>24</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>6</instrument></note><note><position>36</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>6</instrument></note><note><position>48</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>6</instrument></note><note><position>72</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>6</instrument></note><note><position>96</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>6</instrument></note><note><position>144</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>6</instrument></note><note><position>168</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>6</instrument></note><note><position>180</position><velocity>0.8</velocity><pan_L>1</pan_L><pan_R>1</pan_R><pitch>0</pitch><length>-1</length><instrument>6</instrument></note></noteList>
+                    <noteList>
+                        <note>
+                            <position>0</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>6</instrument>
+                        </note>
+                        <note>
+                            <position>24</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>6</instrument>
+                        </note>
+                        <note>
+                            <position>36</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>6</instrument>
+                        </note>
+                        <note>
+                            <position>48</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>6</instrument>
+                        </note>
+                        <note>
+                            <position>72</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>6</instrument>
+                        </note>
+                        <note>
+                            <position>96</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>6</instrument>
+                        </note>
+                        <note>
+                            <position>144</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>6</instrument>
+                        </note>
+                        <note>
+                            <position>168</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>6</instrument>
+                        </note>
+                        <note>
+                            <position>180</position>
+                            <velocity>0.8</velocity>
+                            <pan_L>1</pan_L>
+                            <pan_R>1</pan_R>
+                            <pitch>0</pitch>
+                            <length>-1</length>
+                            <instrument>6</instrument>
+                        </note>
+                    </noteList>
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
             </sequenceList>
         </pattern>
@@ -909,100 +1237,100 @@
             <size>192</size>
             <sequenceList>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
             </sequenceList>
         </pattern>
@@ -1011,100 +1339,100 @@
             <size>192</size>
             <sequenceList>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
             </sequenceList>
         </pattern>
@@ -1113,100 +1441,100 @@
             <size>192</size>
             <sequenceList>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
             </sequenceList>
         </pattern>
@@ -1215,100 +1543,100 @@
             <size>192</size>
             <sequenceList>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
             </sequenceList>
         </pattern>
@@ -1317,100 +1645,100 @@
             <size>192</size>
             <sequenceList>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
             </sequenceList>
         </pattern>
@@ -1419,100 +1747,100 @@
             <size>192</size>
             <sequenceList>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
             </sequenceList>
         </pattern>
@@ -1521,100 +1849,100 @@
             <size>192</size>
             <sequenceList>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
             </sequenceList>
         </pattern>
@@ -1623,100 +1951,100 @@
             <size>192</size>
             <sequenceList>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
             </sequenceList>
         </pattern>
@@ -1725,100 +2053,100 @@
             <size>192</size>
             <sequenceList>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
                 <sequence>
-                    <noteList/>
+                    <noteList />
                 </sequence>
             </sequenceList>
         </pattern>
