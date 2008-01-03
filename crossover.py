@@ -16,9 +16,7 @@ class Crossover(object):
         raise Exception("mate method is not implemented.")
 
 class OnePointCrossover(Crossover):
-    """
-    The simplest crossover.
-    """
+    """The simplest crossover."""
     def mate(self, parent1, parent2):
         x = len(parent1)
         crossPoint = randint(1, x - 1)

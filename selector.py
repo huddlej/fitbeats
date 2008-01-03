@@ -136,3 +136,24 @@ class NewRouletteSelector(Selector):
 
         print "Return candidates", len(candidates)
         return candidates
+
+class SpeaSelector(Selector):
+    """
+    Interfaces with the PISA-based multiobjective optimization algorithm SPEA2.
+    See: http://www.tik.ee.ethz.ch/sop/pisa/
+    """
+    def __init__(self, *args, **kwargs):
+        """
+        Sets up the local archive of all organisms ever passed to the selector.
+        """
+        self.archive = {}
+        self.max_id = 0
+        super(SpeaSelector, self).__init__(*args, **kwargs)
+    
+    def get_max_id(self):
+        max = self.max_id
+        self.max_id += 1
+        return max
+    
+    def select(self, organisms, n):
+        pass

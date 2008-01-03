@@ -165,10 +165,6 @@ class FitnessTrajectory(models.Model):
     pattern = models.ForeignKey(Pattern, editable=False)
     function = models.ForeignKey(FitnessFunction, verbose_name="Rhythmic rule")
     trajectory_type = models.CharField(maxlength=10, choices=TRAJECTORY_TYPES, editable=False)
-
-    def get_absolute_url(self):
-        return ('fitbeats.views.edit_trajectory', [str(self.pattern.id), str(self.id)])
-    get_absolute_url = permalink(get_absolute_url)
     
     def __str__(self):
         return "%s (%s)" % (self.function, self.trajectory_type)
@@ -185,7 +181,11 @@ class FitnessTrajectory(models.Model):
         else:
             return None
     trajectory_set = property(_trajectory_set)
-    
+
+    def get_absolute_url(self):
+        return ('fitbeats.views.edit_trajectory', [str(self.pattern.id), str(self.id)])
+    get_absolute_url = permalink(get_absolute_url)
+
     def calculate_trajectory(self):
         patternLength = self.pattern.length
         

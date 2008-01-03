@@ -27,6 +27,9 @@ def main(pattern_id=None):
     
     usage = "usage: %prog [-p] [[options] pattern_id]"
     parser = OptionParser(usage)
+    parser.add_option("-f", "--prefix",
+                      dest="pisa_prefix", type="string", default="PISA_",
+                      help="the prefix to use for all PISA configuration files.")
     parser.add_option("-m", "--mutators",
                       dest="mutator_arg", type="string", default="0",
                       help="a comma delimited string of mutators to use by id")

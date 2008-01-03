@@ -17,14 +17,34 @@ def read_data_file(filename):
         if actual_number_of_elements != expected_number_of_elements or end_of_file != "END":
             raise CorruptedDataException("File %s does not contain the expected number of values.  Expected %s values, found %s." % (filename, expected_number_of_elements, actual_number_of_elements))
 
-        data = {}
+        data = None
         for line in lines:
             values = line.split()
             index = int(values.pop(0))
-            data[index] = values or None
+            if len(values) == 0:
+                # No more values means this is an index file.
+                if data is None:
+                    data = []
+                try:
+                    value = int(index)
+                except:
+                    value = float(index)
+                data.append(value)
+            else:
+                # More values means this is a fitness value file.
+                if data is None:
+                    data = {}
+                try:
+                    values = map(int, values)
+                except:
+                    values = map(float, values)
+                data[index] = values
+        f.close()
+        f = open(filename, "w")
+        f.write("0")
+
         return data
     finally:
-        print "Finally!"
         f.close()
 
 def read_configuration_file(filename):
@@ -38,11 +58,16 @@ def read_configuration_file(filename):
         for line in lines:
             values = line.split()
             if len(values) > 0:
-                index = values.pop(0)
-                data[index] = values or None
+                index = values[0]
+                try:
+                    value = int(values[1])
+                except:
+                    value = float(values[1])
+                data[index] = value
 
         if len(data) == 0:
             raise CorruptedDataException("Configuraton file %s is empty." % filename)
+        
         return data
     finally:
         f.close()
@@ -61,9 +86,29 @@ def read_state_file(filename):
     finally:
         f.close()
 
-def write_file(filename, data):
+def write_file(filename, data, dimensions=0):
     f = open(filename, "w")
     try:
-        f.write(str(data))
+        if isinstance(data, list) or isinstance(data, tuple):
+            elements = len(data) * (dimensions + 1)
+            f.write("%i\n" % elements)
+            for value in data:
+                if isinstance(value, list) or isinstance(value, tuple):
+                    f.write(" ".join(map(str, value)))
+                else:
+                    f.write(str(value))
+                f.write("\n")
+            f.write("END")
+        elif isinstance(data, dict):
+            elements = len(data) * (dimensions + 1)
+            f.write("%i\n" % elements)
+            for key, values in data.items():
+                line = [key] + list(values)
+                f.write(" ".join(map(str, line)))
+                f.write("\n")
+            f.write("END")
+        else:
+            f.write(str(data))
+            f.write("\n")
     finally:
         f.close()

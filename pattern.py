@@ -84,8 +84,8 @@ class PatternOrganism(Organism):
     def fitness(self):
         # Only evaluate this individual's fitness once
         try:
-            if self.fitness_value:
-                return self.fitness_value
+            if self._fitness:
+                return self._fitness
         except:
             pass
 
@@ -101,8 +101,8 @@ class PatternOrganism(Organism):
             fitness_function = eval(trajectory.function.name)
             fitness += fitness_function(self, trajectory)
 
-        self.fitness_value = float(fitness) / n
-        return self.fitness_value
+        self._fitness = float(fitness) / n
+        return self._fitness
 
     def mate(self, partner):
         """
@@ -123,7 +123,7 @@ class PatternOrganism(Organism):
         """
         #copy = self.__class__(**genes)
         self_copy = copy.deepcopy(self)
-        self_copy.fitness_value = None
+        self_copy._fitness = None
         return self_copy
 
     def mutate(self):
@@ -165,6 +165,41 @@ class PatternOrganism(Organism):
     def xmlDumps(self):
         song = savePatternToXml(self, None, True)
         return song.toxml()
+
+class MultiObjectivePatternOrganism(PatternOrganism):
+    """
+    Pattern Organism that treats fitness as a vector of objective values
+    for the sake of multiobjective optimization.
+    """
+    def fitness(self):
+        # Evaluate the fitness once.
+        if hasattr(self, '_fitness'):
+            return self._fitness
+        else:
+            self._fitness = []
+
+        n = len(self.trajectory_set)
+        if n == 0:
+            return self._fitness
+
+        # Evaluate each trajectory.
+        for trajectory in self.trajectory_set:
+            fitness_function = eval(trajectory.function.name)
+            self._fitness.append(fitness_function(self, trajectory))
+
+        return self._fitness
+        
+    def mutate(self):
+        """Mutates the individual without regarding fitness."""
+        mutant = self.copy()
+        if len(self.mutators) > 0 and random() < self.mutProb:
+            # TODO: Mutators should handle mutation with a static method.
+            # Choose a random mutator.
+            mutator = eval(choice(self.mutators))
+            operator = mutator(mutant)
+            mutant = operator.mutate()
+
+        return mutant
 
 class PatternPopulation(Population):
     """

@@ -1,0 +1,16 @@
+crossover
+ * mate() takes two parents
+ * returns two individuals resulting from the mating of the parents
+mutator
+ * mutate() takes one individual
+ * returns a mutant of the individual
+selector
+ * select() takes a list of organisms and the number of organisms to return
+
+dictionary-based population
+ * create initial population with an id for each individual
+ * write init pop to file
+ * read sample and archive
+ * 
+
+
