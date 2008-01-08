@@ -173,20 +173,13 @@ class MultiObjectivePatternOrganism(PatternOrganism):
     """
     def fitness(self):
         # Evaluate the fitness once.
-        if hasattr(self, '_fitness'):
-            return self._fitness
-        else:
+        if not hasattr(self, '_fitness'):
             self._fitness = []
-
-        n = len(self.trajectory_set)
-        if n == 0:
-            return self._fitness
-
-        # Evaluate each trajectory.
-        for trajectory in self.trajectory_set:
-            fitness_function = eval(trajectory.function.name)
-            self._fitness.append(fitness_function(self, trajectory))
-
+            if len(self.trajectory_set) > 0:
+                # Evaluate each trajectory.
+                for trajectory in self.trajectory_set:
+                    fitness_function = eval(trajectory.function.name)
+                    self._fitness.append(fitness_function(self, trajectory))
         return self._fitness
         
     def mutate(self):
@@ -238,6 +231,47 @@ class PatternPopulation(Population):
         parents = self.selector.select(self.organisms, self.childCount)
         children = []
         
+        for i in xrange(self.childCount):
+            # Choose first parent
+            parent1 = parent2 = choice(parents)
+        
+            # Choose second parent not equal to first parent
+            maxwait = 400
+            i = 0
+            while parent1.genes.tolist() == parent2.genes.tolist():
+                if i > maxwait:
+                    # Try another random set of parents if the first one didn't work.
+                    parent1 = parent2 = choice(parents)
+                parent2 = choice(parents)
+                i += 1
+        
+            # Reproduce
+            child1, child2 = parent1 + parent2
+
+            # Mutate children
+            child1 = child1.mutate()
+            child2 = child2.mutate()
+        
+            children.extend([child1, child2])
+
+        children.extend(parents)
+        children.sort()
+
+        # Set parents and children as the new population
+        self.organisms = children
+
+    def worst(self):
+        return max(self)
+
+class DictPopulation(Population):
+    pass
+
+class MultiObjectiveDictPopulation(DictPopulation):
+    def gen(self, nfittest=None, nchildren=None):
+        """Executes a generation of the population."""
+        # Select n individuals to be parents
+        parents = self.selector.select(self.organisms, self.childCount)
+        children = {}
         for i in xrange(self.childCount):
             # Choose first parent
             parent1 = parent2 = choice(parents)

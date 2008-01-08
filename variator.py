@@ -1,19 +1,18 @@
 """Variator mockup used to test PISA functionality."""
 import random
-import sys
 import time
 import pisa
 
 try:
-    poll_period = 1
     MAX_GENERATIONS = 10
+    pisa_prefix = "PISA_"
+    poll_period = 1
     pisa_files = {"configuration": "cfg", 
                   "initial_population": "ini",
                   "archive": "arc",
                   "sample": "sel", 
                   "offspring": "var",
                   "state": "sta"}
-    pisa_prefix = "PISA_"
     for key, value in pisa_files.items():
         pisa_files[key] = "%s%s" % (pisa_prefix, value)
 
