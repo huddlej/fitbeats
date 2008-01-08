@@ -16,6 +16,7 @@ from pygene.population import Population
 from functions import *
 from mutator import *
 from hydrogen import savePatternToXml
+import pisa
 
 class PatternGene(IntGene):
     mutProb = 0.02
@@ -264,42 +265,106 @@ class PatternPopulation(Population):
         return max(self)
 
 class DictPopulation(Population):
-    pass
+    def __init__(self, *items, **kwargs):
+        self.max_id = 0
+        self.organisms = {}
+        super(DictPopulation, self).__init__(*items, **kwargs)
 
-class MultiObjectiveDictPopulation(DictPopulation):
-    def gen(self, nfittest=None, nchildren=None):
-        """Executes a generation of the population."""
-        # Select n individuals to be parents
-        parents = self.selector.select(self.organisms, self.childCount)
-        children = {}
-        for i in xrange(self.childCount):
-            # Choose first parent
-            parent1 = parent2 = choice(parents)
-        
-            # Choose second parent not equal to first parent
-            maxwait = 400
-            i = 0
-            while parent1.genes.tolist() == parent2.genes.tolist():
-                if i > maxwait:
-                    # Try another random set of parents if the first one didn't work.
-                    parent1 = parent2 = choice(parents)
-                parent2 = choice(parents)
-                i += 1
-        
-            # Reproduce
-            child1, child2 = parent1 + parent2
+    def add(self, *args):
+        for arg in args:
+            if isinstance(arg, Organism):
+                self.organisms[self.max_id] = arg
+                self.max_id += 1
+            else:
+                self.add(arg)
 
-            # Mutate children
-            child1 = child1.mutate()
-            child2 = child2.mutate()
-        
-            children.extend([child1, child2])
-
-        children.extend(parents)
-        children.sort()
-
-        # Set parents and children as the new population
-        self.organisms = children
+    def best(self):
+        return max(self.organisms.values())
 
     def worst(self):
-        return max(self)
+        return min(self.organisms.values())
+
+class MultiObjectiveDictPopulation(DictPopulation):
+    # TODO: Replace magic PISA numbers with named constants.
+    def __init__(self, pisa_prefix, pisa_period, *items, **kwargs):
+        self.pisa_prefix = pisa_prefix
+        self.pisa_period = pisa_period
+        self.pisa_files = {}
+        for key, value in pisa.files.items():
+            self.pisa_files[key] = "%s%s" % (pisa_prefix, value)
+
+        # Write 0 to the state file.
+        pisa.write_file(self.pisa_files['state'], 0)
+
+        # Read common parameters.
+        self.pisa_parameters = pisa.read_configuration_file(self.pisa_files['configuration'])
+        print "Loaded parameters: %s\n" % self.pisa_parameters
+
+        # Generate the initial population.
+        super(MultiObjectiveDictPopulation, self).__init__(*items, **kwargs)
+
+        # Write initial population into init pop file
+        pisa.write_file(self.pisa_files['initial_population'], self.organisms, self.pisa_parameters['dim'])
+
+        # Write 1 to the state file
+        pisa.write_file(self.pisa_files['state'], 1)
+
+    def __del__(self):
+        if hasattr(self, 'state') and self.state != 4:
+            # Write 6 to state file
+            pisa.write_file(self.pisa_files['state'], 6)
+ 
+    def gen(self, nfittest=None, nchildren=None):
+        """Executes a generation of the population."""
+        # If state is 4, return False. If state is 2, process selector output.
+        # Otherwise, read state file every n seconds where n is the poll time.
+        while True:
+            self.state = pisa.read_state_file(self.pisa_files['state'])
+            if self.state == 4:
+                print "Selector has terminated\n"
+                return False
+            elif self.state == 2:
+                break
+            else:
+                # Sleep for n seconds, then continue.
+                print "Waiting for selector\n"
+                time.sleep(poll_period)
+                continue
+
+        # Load sample from sample file.
+        print "Read sample file\n"
+        sample = pisa.read_data_file(self.pisa_files['sample'])
+        
+        # Load archive from archive file.
+        archive = pisa.read_data_file(self.pisa_files['archive'])
+
+        # Clean up local population based on archive contents.
+        ids = population.keys()
+        for id in ids:
+            if id not in archive:
+                del(population[id])
+
+        # Pair up and mate parents from sample with mutation.
+        offspring = {}
+        for i in xrange(self.pisa_parameters['lambda']):
+            # Choose the first parent.
+            parent_index_1 = parent_index_2 = choice(sample)
+        
+            # Choose the second parent not equal to first parent.
+            while parent_index_1 == parent_index_2:
+                parent_index_2 = choice(sample)
+        
+            # Reproduce and mutate.
+            children = self.organisms[parent_index_1] + self.organisms[parent_index_2]
+            child = choice(children)
+            child = child.mutate()
+
+            # Calculate fitness and add child.
+            offspring[self.max_id] = child.fitness()
+            self.add(child)
+
+        # Write offspring to offspring file
+        pisa.write_file(self.pisa_files['offspring'], offspring, self.pisa_parameters['dim'])
+
+        # Write 3 to the state file
+        pisa.write_file(self.pisa_files['state'], 3)

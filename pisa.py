@@ -1,5 +1,14 @@
 """Lower level method to support the PISA variator interface."""
 
+files = {
+         "configuration": "cfg", 
+         "initial_population": "ini",
+         "archive": "arc",
+         "sample": "sel", 
+         "offspring": "var",
+         "state": "sta"
+         }
+
 class CorruptedDataException(Exception):
     pass
 
