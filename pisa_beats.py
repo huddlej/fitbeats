@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-evolve_beats.py
+pisa_beats.py
 
 Evolves a pattern of beats based on a collection of user-defined fitness
 trajectories.  The genetic algorithm is based on the pygene library.
@@ -30,6 +30,10 @@ def main(pattern_id=None):
     parser.add_option("-f", "--prefix",
                       dest="pisa_prefix", type="string", default="PISA_",
                       help="the prefix to use for all PISA configuration files.")
+    parser.add_option("-t", "--poll",
+                      dest="pisa_period", type="float", default=1.0,
+                      help="the amount of time the variator should wait between\
+                            polling the PISA state file.")
     parser.add_option("-s", "--stats",
                       dest="statfile", type="string", default="stats.txt",
                       help="a filename for the statistical output")
@@ -80,6 +84,10 @@ def main(pattern_id=None):
     statfile = options.statfile
     songfile = options.songfile
     pisa_prefix = options.pisa_prefix
+    pisa_period = options.pisa_period
+    
+    print "poll: %s, prefix: %s" % (pisa_period, pisa_prefix)
+    sys.exit(0)
     
     try:
         pattern = Pattern.objects.get(pk=pattern_id)
@@ -120,10 +128,12 @@ def main(pattern_id=None):
     PatternOrganism.gene = PatternGene
     
     # Prepare population
-    PatternPopulation.selector=selector()
-    ph = PatternPopulation(init=int(parameters['population_initial_size']),
-                           species=PatternOrganism)
-    ph.childCount = int(parameters['population_new_children'])
+    childCount = int(parameters['population_new_children'])
+    selector=selector()
+    initial_population_size = int(parameters['population_initial_size'])
+    ph = MultiObjectiveDictPopulation(pisa_prefix, pisa_period, childCount, 
+                                      selector, init=initial_population_size,
+                                      species=PatternOrganism)
     max_generations = int(parameters['population_max_generations'])
     
     if not quiet:

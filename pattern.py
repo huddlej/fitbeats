@@ -13,14 +13,13 @@ from random import random, choice
 from pygene.gene import IntGene
 from pygene.organism import Organism
 from pygene.population import Population
-from functions import *
+from fitness import *
 from mutator import *
 from hydrogen import savePatternToXml
 import pisa
 
 class PatternGene(IntGene):
-    mutProb = 0.02
-    
+    mutProb = 0.02    
     randMin = 0
     randMax = 1
 
@@ -265,9 +264,11 @@ class PatternPopulation(Population):
         return max(self)
 
 class DictPopulation(Population):
-    def __init__(self, *items, **kwargs):
+    def __init__(self, childCount, selector, *items, **kwargs):
         self.max_id = 0
         self.organisms = {}
+        self.childCount = childCount
+        self.selector = selector
         super(DictPopulation, self).__init__(*items, **kwargs)
 
     def add(self, *args):
@@ -285,7 +286,6 @@ class DictPopulation(Population):
         return min(self.organisms.values())
 
 class MultiObjectiveDictPopulation(DictPopulation):
-    # TODO: Replace magic PISA numbers with named constants.
     def __init__(self, pisa_prefix, pisa_period, *items, **kwargs):
         self.pisa_prefix = pisa_prefix
         self.pisa_period = pisa_period
@@ -294,7 +294,7 @@ class MultiObjectiveDictPopulation(DictPopulation):
             self.pisa_files[key] = "%s%s" % (pisa_prefix, value)
 
         # Write 0 to the state file.
-        pisa.write_file(self.pisa_files['state'], 0)
+        pisa.write_file(self.pisa_files['state'], pisa.STATE_0)
 
         # Read common parameters.
         self.pisa_parameters = pisa.read_configuration_file(self.pisa_files['configuration'])
@@ -307,12 +307,12 @@ class MultiObjectiveDictPopulation(DictPopulation):
         pisa.write_file(self.pisa_files['initial_population'], self.organisms, self.pisa_parameters['dim'])
 
         # Write 1 to the state file
-        pisa.write_file(self.pisa_files['state'], 1)
+        pisa.write_file(self.pisa_files['state'], pisa.STATE_1)
 
     def __del__(self):
-        if hasattr(self, 'state') and self.state != 4:
+        if hasattr(self, 'state') and self.state != pisa.STATE_4:
             # Write 6 to state file
-            pisa.write_file(self.pisa_files['state'], 6)
+            pisa.write_file(self.pisa_files['state'], pisa.STATE_6)
  
     def gen(self, nfittest=None, nchildren=None):
         """Executes a generation of the population."""
@@ -320,10 +320,10 @@ class MultiObjectiveDictPopulation(DictPopulation):
         # Otherwise, read state file every n seconds where n is the poll time.
         while True:
             self.state = pisa.read_state_file(self.pisa_files['state'])
-            if self.state == 4:
+            if self.state == pisa.STATE_4:
                 print "Selector has terminated\n"
                 return False
-            elif self.state == 2:
+            elif self.state == pisa.STATE_2:
                 break
             else:
                 # Sleep for n seconds, then continue.
@@ -367,4 +367,4 @@ class MultiObjectiveDictPopulation(DictPopulation):
         pisa.write_file(self.pisa_files['offspring'], offspring, self.pisa_parameters['dim'])
 
         # Write 3 to the state file
-        pisa.write_file(self.pisa_files['state'], 3)
+        pisa.write_file(self.pisa_files['state'], pisa.STATE_3)
