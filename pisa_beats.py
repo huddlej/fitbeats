@@ -14,7 +14,7 @@ os.environ['DJANGO_SETTINGS_MODULE'] = "fitbeat_project.settings"
 
 from random import choice, random
 from optparse import OptionParser
-from pattern import PatternGene, PatternOrganism, PatternPopulation
+from pattern import PatternGene, MultiObjectivePatternOrganism, MultiObjectiveDictPopulation
 from fitbeat_project.fitbeats.models import *
 from selector import RouletteSelector, TournamentSelector, NewRouletteSelector
 from crossover import OnePointCrossover
@@ -70,24 +70,12 @@ def main(pattern_id=None):
         sys.exit()
     elif pattern_id is None and len(args) != 1:
         parser.error("""You must supply a pattern id as an argument or use the
-                        -p flag to list the available patterns.""")
+                      -p flag to list the available patterns.""")
     else:
         try:
             pattern_id = pattern_id or int(args[0])
         except ValueError:
             parser.error("You must supply an integer value for the pattern id.")
-    
-    # Set option variables    
-    limit_mutation = options.limit_mutation
-    database_dump = options.database_dump
-    quiet = options.quiet
-    statfile = options.statfile
-    songfile = options.songfile
-    pisa_prefix = options.pisa_prefix
-    pisa_period = options.pisa_period
-    
-    print "poll: %s, prefix: %s" % (pisa_period, pisa_prefix)
-    sys.exit(0)
     
     try:
         pattern = Pattern.objects.get(pk=pattern_id)
@@ -95,9 +83,6 @@ def main(pattern_id=None):
         print "Error: could not load pattern %s" % pattern_id
         sys.exit(1)
     
-    length = pattern.length
-    instrument_length = pattern.instrument_length
-
     selector = eval(pattern.selector.get_short_name())
     crossover = eval(pattern.crossover.get_short_name())
     mutators = ["%sMutator" % m.name for m in pattern.mutators.all()]
@@ -105,59 +90,59 @@ def main(pattern_id=None):
     trajectory_set = pattern.fitnesstrajectory_set.all()
     for trajectory in trajectory_set:
         trajectory.calculate_trajectory()
-        
-    parameters = pattern.parameters.all()
-    parameter_dict = {}
-    for parameter in parameters:
-        parameter_dict[parameter.name] = parameter.value
-    parameters = parameter_dict
+
+    parameters = dict([(parameter.name, parameter.value) for parameter in pattern.parameters.all()])
     
     # Prepare gene
     PatternGene.mutProb = parameters['gene_mutation_probability']
     
     # Prepare organism
-    PatternOrganism.mutProb = parameters['organism_mutation_probability']
-    PatternOrganism.crossoverRate = parameters['organism_crossover_rate']
-    PatternOrganism.instrument_length = instrument_length
-    PatternOrganism.instruments = pattern.instruments.all()
-    PatternOrganism.length = length
-    PatternOrganism.crossover = crossover()
-    PatternOrganism.mutators = mutators
-    PatternOrganism.limit_mutation = limit_mutation
-    PatternOrganism.trajectory_set = trajectory_set
-    PatternOrganism.gene = PatternGene
+    MultiObjectivePatternOrganism.mutProb = parameters['organism_mutation_probability']
+    MultiObjectivePatternOrganism.crossoverRate = parameters['organism_crossover_rate']
+    MultiObjectivePatternOrganism.instrument_length = pattern.instrument_length
+    MultiObjectivePatternOrganism.instruments = pattern.instruments.all()
+    MultiObjectivePatternOrganism.length = pattern.length
+    MultiObjectivePatternOrganism.crossover = crossover()
+    MultiObjectivePatternOrganism.mutators = mutators
+    MultiObjectivePatternOrganism.limit_mutation = options.limit_mutation
+    MultiObjectivePatternOrganism.trajectory_set = trajectory_set
+    MultiObjectivePatternOrganism.gene = PatternGene
     
     # Prepare population
     childCount = int(parameters['population_new_children'])
     selector=selector()
     initial_population_size = int(parameters['population_initial_size'])
-    ph = MultiObjectiveDictPopulation(pisa_prefix, pisa_period, childCount, 
+    ph = MultiObjectiveDictPopulation(options.pisa_prefix, options.pisa_period, childCount, 
                                       selector, init=initial_population_size,
-                                      species=PatternOrganism)
+                                      species=MultiObjectivePatternOrganism)
     max_generations = int(parameters['population_max_generations'])
     
-    if not quiet:
-        print "Pattern Length: %i, Instruments: %i" % (length, instrument_length)
+    if not options.quiet:
+        print "Pattern Length: %i" % pattern.length
+        print "Instruments:"
+        for i in pattern.instruments.all():
+            print "\t%s" % i
         print "Generations: %i" % max_generations
         print "Selector: %s" % pattern.selector.name
         print "Crossover: %s" % pattern.crossover.name
         print "Mutators:\n\t%s" % "\n\t".join(mutators)
         print "Fitness Trajectories:"
-        print trajectory_set
-        #print "Parameters:"
-        #print parameters
+        for t in trajectory_set:
+            print "\t%s" % t
+        print "Parameters:"
+        for key, value in parameters.iteritems():
+            print "\t%s: %s" % (key, value)
     
     stats = {}
     webstats = None
-    lastBest = 1000
+    lastBest = None
     lastBestCount = 0
     i = 0
-    statfile = "/home/huddlej/fitbeats/testData.txt"
     stopfile = "/home/huddlej/fitbeats/stopfile.txt"
 
     while i < max_generations:
         # Check for file-based exit command.
-        if database_dump:
+        if options.database_dump:
             try:
                 fhandle = open(stopfile, "r")
                 stop = pickle.load(fhandle)
@@ -168,32 +153,27 @@ def main(pattern_id=None):
     
         try:
             b = ph.best()
-            diversity = ph.diversity()
-            #b = ph.worst()
+            #diversity = ph.diversity()
             
-            if not quiet:
-                print "generation %i:\n%s best=%f, average=%f, diversity=%f)" % (i, 
-                                                                                 repr(b),
-                                                                                 b.fitness(),
-                                                                                 ph.fitness(),
-                                                                                 diversity)
+            if not options.quiet:
+                print "generation %i:\n%s best=%s)" % (i, 
+                                                       repr(b),
+                                                       b.fitness())
             
             stats[i] = {'generation': i, 
-                        'bestfitness': b.fitness(), 
-                        'popfitness': ph.fitness(),
-                        'diversity': diversity,
+                        'bestfitness': b.fitness(),
                         'best_pattern': b,
                         'is_done': False}
             webstats = stats[i]            
             # Store for web, TODO: make this better
-            fhandle = open(statfile, "w")
+            fhandle = open(options.statfile, "w")
             pickle.dump(webstats, fhandle)
             fhandle.close()
             
             if b.fitness() <= 0:
                 break
                 
-            if lastBest > b.fitness():
+            if lastBest is None or lastBest > b.fitness():
                 lastBest = b.fitness()
                 lastBestCount = 1
             else:
@@ -207,7 +187,7 @@ def main(pattern_id=None):
         except KeyboardInterrupt:
             break
 
-    if database_dump:
+    if options.database_dump:
         p = PatternInstance(pattern=pattern,
                             fitness=b.fitness(),
                             value=b.xmlDumps())
@@ -215,28 +195,28 @@ def main(pattern_id=None):
     
     if webstats:
         webstats['is_done'] = True
-        fhandle = open(statfile, "w")
+        fhandle = open(options.statfile, "w")
         pickle.dump(webstats, fhandle)
         fhandle.close()
             
-    if not quiet:
-        print "Stopped:\n%f" % lastBest
+    if not options.quiet:
+        print "Stopped:\n%s" % lastBest
         #print "Average diversity: %f" % ph.diversity()
     
     # Store new statistics data
-    #fileHandle = open(statfile, 'w')
+    #fileHandle = open(options.statfile, 'w')
     #pickle.dump(stats, fileHandle)
     #fileHandle.close()
 
-    if songfile:
-        testxml = open(songfile, "w")
+    if options.songfile:
+        testxml = open(options.songfile, "w")
         b.xmlDump(testxml)
         testxml.close()
 
-        if not quiet:
-            print "Wrote %s" % songfile
+        if not options.quiet:
+            print "Wrote %s" % options.songfile
     else:
-        if not quiet:
+        if not options.quiet:
             print "No file written."
         
 if __name__ == '__main__':

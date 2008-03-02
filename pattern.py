@@ -9,6 +9,7 @@ Represents all elements population of organisms:
 """
 import Numeric
 import copy
+import time
 from random import random, choice
 from pygene.gene import IntGene
 from pygene.organism import Organism
@@ -16,7 +17,9 @@ from pygene.population import Population
 from fitness import *
 from mutator import *
 from hydrogen import savePatternToXml
+from fitbeat_project.fitbeats.functions import similarity
 import pisa
+
 
 class PatternGene(IntGene):
     mutProb = 0.02    
@@ -31,7 +34,8 @@ class PatternGene(IntGene):
             return cmp(this.value, other)
         else:
             return cmp(this.value, other.value)
-        
+
+
 class PatternOrganism(Organism):
     mutProb = 0.02
     crossoverRate = 0.9
@@ -166,6 +170,7 @@ class PatternOrganism(Organism):
         song = savePatternToXml(self, None, True)
         return song.toxml()
 
+
 class MultiObjectivePatternOrganism(PatternOrganism):
     """
     Pattern Organism that treats fitness as a vector of objective values
@@ -173,7 +178,7 @@ class MultiObjectivePatternOrganism(PatternOrganism):
     """
     def fitness(self):
         # Evaluate the fitness once.
-        if not hasattr(self, '_fitness'):
+        if not hasattr(self, '_fitness') or self._fitness is None:
             self._fitness = []
             if len(self.trajectory_set) > 0:
                 # Evaluate each trajectory.
@@ -193,6 +198,7 @@ class MultiObjectivePatternOrganism(PatternOrganism):
             mutant = operator.mutate()
 
         return mutant
+
 
 class PatternPopulation(Population):
     """
@@ -263,13 +269,27 @@ class PatternPopulation(Population):
     def worst(self):
         return max(self)
 
+
 class DictPopulation(Population):
     def __init__(self, childCount, selector, *items, **kwargs):
         self.max_id = 0
         self.organisms = {}
         self.childCount = childCount
         self.selector = selector
-        super(DictPopulation, self).__init__(*items, **kwargs)
+
+        if kwargs.has_key('species'):
+            species = self.species = kwargs['species']
+        else:
+            species = self.species
+    
+        if kwargs.has_key('init'):
+            init = self.initPopulation = kwargs['init']
+        else:
+            init = self.initPopulation
+    
+        if not items:
+            for i in xrange(init):
+                self.add(species())
 
     def add(self, *args):
         for arg in args:
@@ -279,11 +299,38 @@ class DictPopulation(Population):
             else:
                 self.add(arg)
 
+    def fitness(self):
+        """
+        returns the average fitness value for the population
+        """
+        raise Exception("Average fitness cannot be meaningfully calculated for organisms with multiobjective fitness vectors.")
+
     def best(self):
         return max(self.organisms.values())
 
     def worst(self):
         return min(self.organisms.values())
+
+    def diversity(self, n=10):
+        """
+        Calculate the diversity of the top n organisms in the population.
+        """
+        similarities = []
+        
+        for i in xrange(n - 1):
+            g1 = [y.value for x in self.organisms[i].genes.tolist() for y in x]
+            
+            for j in xrange(i+1, n):
+                g2 = [y.value for x in self.organisms[j].genes.tolist() for y in x]
+                s = similarity(g1, g2)
+                similarities.append(s)
+                
+        total = sum(similarities)
+        length = len(similarities)
+        diversity = total / length
+        
+        return diversity
+
 
 class MultiObjectiveDictPopulation(DictPopulation):
     def __init__(self, pisa_prefix, pisa_period, *items, **kwargs):
@@ -293,6 +340,8 @@ class MultiObjectiveDictPopulation(DictPopulation):
         for key, value in pisa.files.items():
             self.pisa_files[key] = "%s%s" % (pisa_prefix, value)
 
+        # TODO: Write to PISA_cfg from Django Pattern parameters.
+
         # Write 0 to the state file.
         pisa.write_file(self.pisa_files['state'], pisa.STATE_0)
 
@@ -301,10 +350,12 @@ class MultiObjectiveDictPopulation(DictPopulation):
         print "Loaded parameters: %s\n" % self.pisa_parameters
 
         # Generate the initial population.
+        kwargs['init'] = self.pisa_parameters['alpha']
         super(MultiObjectiveDictPopulation, self).__init__(*items, **kwargs)
 
         # Write initial population into init pop file
-        pisa.write_file(self.pisa_files['initial_population'], self.organisms, self.pisa_parameters['dim'])
+        fitnesses = [[key] + org.fitness() for key, org in self.organisms.items()]
+        pisa.write_file(self.pisa_files['initial_population'], fitnesses, self.pisa_parameters['dim'])
 
         # Write 1 to the state file
         pisa.write_file(self.pisa_files['state'], pisa.STATE_1)
@@ -321,29 +372,29 @@ class MultiObjectiveDictPopulation(DictPopulation):
         while True:
             self.state = pisa.read_state_file(self.pisa_files['state'])
             if self.state == pisa.STATE_4:
-                print "Selector has terminated\n"
+                #print "Selector has terminated\n"
                 return False
             elif self.state == pisa.STATE_2:
                 break
             else:
                 # Sleep for n seconds, then continue.
-                print "Waiting for selector\n"
-                time.sleep(poll_period)
+                #print "Waiting for selector\n"
+                time.sleep(self.pisa_period)
                 continue
 
         # Load sample from sample file.
-        print "Read sample file\n"
+        #print "Read sample file\n"
         sample = pisa.read_data_file(self.pisa_files['sample'])
         
         # Load archive from archive file.
         archive = pisa.read_data_file(self.pisa_files['archive'])
 
         # Clean up local population based on archive contents.
-        ids = population.keys()
+        ids = self.organisms.keys()
         for id in ids:
             if id not in archive:
-                del(population[id])
-
+                del(self.organisms[id])
+    
         # Pair up and mate parents from sample with mutation.
         offspring = {}
         for i in xrange(self.pisa_parameters['lambda']):
@@ -353,7 +404,7 @@ class MultiObjectiveDictPopulation(DictPopulation):
             # Choose the second parent not equal to first parent.
             while parent_index_1 == parent_index_2:
                 parent_index_2 = choice(sample)
-        
+
             # Reproduce and mutate.
             children = self.organisms[parent_index_1] + self.organisms[parent_index_2]
             child = choice(children)
@@ -364,7 +415,11 @@ class MultiObjectiveDictPopulation(DictPopulation):
             self.add(child)
 
         # Write offspring to offspring file
-        pisa.write_file(self.pisa_files['offspring'], offspring, self.pisa_parameters['dim'])
+        pisa.write_file(self.pisa_files['offspring'], offspring, 
+                        self.pisa_parameters['dim'])
 
         # Write 3 to the state file
         pisa.write_file(self.pisa_files['state'], pisa.STATE_3)
+        
+        # Save the sample.
+        self.sample = sample

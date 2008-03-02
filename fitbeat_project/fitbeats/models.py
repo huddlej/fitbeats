@@ -25,13 +25,18 @@ class Parameter(models.Model):
         search_fields = ['name']
 
 class Crossover(models.Model):
+    # TODO: Crossover could implement __call__ and use __import__ to execute
+    # the right method.
     name = models.CharField(maxlength=100)
     
     def __str__(self):
         return self.name
 
+    def __repr__(self):
+        return "".join((self.name.replace(" ", ""), self.__class__.__name__))
+
     def get_short_name(self):
-        return "%s%s" % (self.name.replace(" ", ""), self.__class__.__name__)
+        return repr(self)
 
     class Admin:
         pass
