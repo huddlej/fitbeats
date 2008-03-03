@@ -61,10 +61,11 @@ def main(pattern_id=None):
         print "----------------------"
         for p in patterns:
             try:
-                print "%i | (%i x %i) | %s" % (p.id, 
-                                               p.length, 
-                                               p.instrument_length, 
-                                               p)
+                print "%i | (%i x %i) | %s | %s" % (p.id, 
+                                                    p.length, 
+                                                    p.instrument_length, 
+                                                    p,
+                                                    p.fitnesstrajectory_set.all())
             except:
                 pass
         sys.exit()
@@ -109,11 +110,12 @@ def main(pattern_id=None):
     MultiObjectivePatternOrganism.gene = PatternGene
     
     # Prepare population
+    dimensions = len(trajectory_set)
     childCount = int(parameters['population_new_children'])
     selector=selector()
     initial_population_size = int(parameters['population_initial_size'])
-    ph = MultiObjectiveDictPopulation(options.pisa_prefix, options.pisa_period, childCount, 
-                                      selector, init=initial_population_size,
+    ph = MultiObjectiveDictPopulation(options.pisa_prefix, options.pisa_period, dimensions,
+                                      childCount, selector, init=initial_population_size,
                                       species=MultiObjectivePatternOrganism)
     max_generations = int(parameters['population_max_generations'])
     

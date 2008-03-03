@@ -333,14 +333,12 @@ class DictPopulation(Population):
 
 
 class MultiObjectiveDictPopulation(DictPopulation):
-    def __init__(self, pisa_prefix, pisa_period, *items, **kwargs):
+    def __init__(self, pisa_prefix, pisa_period, dimensions, *items, **kwargs):
         self.pisa_prefix = pisa_prefix
         self.pisa_period = pisa_period
         self.pisa_files = {}
         for key, value in pisa.files.items():
             self.pisa_files[key] = "%s%s" % (pisa_prefix, value)
-
-        # TODO: Write to PISA_cfg from Django Pattern parameters.
 
         # Write 0 to the state file.
         pisa.write_file(self.pisa_files['state'], pisa.STATE_0)
@@ -348,6 +346,10 @@ class MultiObjectiveDictPopulation(DictPopulation):
         # Read common parameters.
         self.pisa_parameters = pisa.read_configuration_file(self.pisa_files['configuration'])
         print "Loaded parameters: %s\n" % self.pisa_parameters
+
+        # Write preset parameters to configuration file.
+        self.pisa_parameters['dim'] = dimensions
+        pisa.write_configuration_file(self.pisa_files['configuration'], self.pisa_parameters)
 
         # Generate the initial population.
         kwargs['init'] = self.pisa_parameters['alpha']

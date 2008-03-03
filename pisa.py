@@ -129,3 +129,10 @@ def write_file(filename, data, dimensions=0):
             f.write("\n")
     finally:
         f.close()
+
+def write_configuration_file(filename, data):
+    order = ('alpha', 'mu', 'lambda', 'dim')
+    f = open(filename, "w")
+    for key in order:
+        f.write("%s %s\n" % (key, data[key]))
+    f.close()

@@ -1,4 +1,4 @@
-alpha 200
-mu 40
-lambda 40
-dim 1
+alpha 1000
+mu 250
+lambda 250
+dim 4
