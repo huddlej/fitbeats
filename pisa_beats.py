@@ -142,7 +142,7 @@ def main(pattern_id=None):
     i = 0
     stopfile = "/home/huddlej/fitbeats/stopfile.txt"
 
-    while i < max_generations:
+    for i in xrange(max_generations):
         # Check for file-based exit command.
         if options.database_dump:
             try:
@@ -155,7 +155,6 @@ def main(pattern_id=None):
     
         try:
             b = ph.best()
-            #diversity = ph.diversity()
             
             if not options.quiet:
                 print "generation %i:\n%s best=%s)" % (i, 
@@ -175,17 +174,8 @@ def main(pattern_id=None):
             if b.fitness() <= 0:
                 break
                 
-            if lastBest is None or lastBest > b.fitness():
-                lastBest = b.fitness()
-                lastBestCount = 1
-            else:
-                lastBestCount += 1
-                
-            #if lastBestCount > 10:
-            #    break
+            # Start the next generation.
             ph.gen()
-
-            i += 1
         except KeyboardInterrupt:
             break
 
@@ -202,8 +192,8 @@ def main(pattern_id=None):
         fhandle.close()
             
     if not options.quiet:
-        print "Stopped:\n%s" % lastBest
-        #print "Average diversity: %f" % ph.diversity()
+        for p in ph.sample:
+            print ph[p]
     
     # Store new statistics data
     #fileHandle = open(options.statfile, 'w')

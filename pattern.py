@@ -291,6 +291,9 @@ class DictPopulation(Population):
             for i in xrange(init):
                 self.add(species())
 
+    def __getitem__(self, index):
+        return self.organisms[index]
+        
     def add(self, *args):
         for arg in args:
             if isinstance(arg, Organism):

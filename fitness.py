@@ -42,7 +42,6 @@ def instrument_beat_density(individual, ft):
     @param PatternOrganism individual
     @param FitnessTrajectory ft
     """
-
     dim_col = individual.length
     fitness = 0.0
     
@@ -71,7 +70,6 @@ def unison(individual, ft):
     @param PatternOrganism individual
     @param FitnessTrajectory ft
     """
-
     dim_col = individual.length
     fitness = 0.0    
     actual_value = 0
@@ -79,7 +77,7 @@ def unison(individual, ft):
     value_count = len(ft.values)
     
     # If there is only one instrument, it is already in unison with itself.
-    if value_count <= 1:
+    if value_count == 1:
         return 0
 
     rows_a = xrange(value_count - 1)
@@ -110,7 +108,6 @@ def double_rhythms(individual, ft):
     @param PatternOrganism individual
     @param FitnessTrajectory ft
     """
-   
     dim_row = individual.instrument_length
     dim_col = individual.length
     fitness = 0.0
@@ -121,7 +118,7 @@ def double_rhythms(individual, ft):
     if not master_row in unified_instruments:
         unified_instruments.append(master_row)
 
-    # Calculate distances between beats for each instrument row
+    # Calculate distances between beats for each instrument row.
     distances = {}
     column_range = xrange(dim_col)
     for instrument_row in unified_instruments:
